@@ -7,7 +7,7 @@ const courses = [
 
 const courseList = document.getElementById("courseList");
 const totalCreditsEl = document.getElementById("totalCredits");
-const courseFilter = document.getElementById("courseFilter");
+const courseFilter = document.getElementById("courseFilter")
 
 function renderCourses(filterText = "") {
   courseList.innerHTML = "";
