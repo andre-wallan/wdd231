@@ -1,9 +1,8 @@
-<script>
-  // Responsive nav menu toggle
-  function toggleNavMenu() {
-    const nav = document.getElementById('mainNav');
-    nav.classList.toggle('open');
-  }
+// Responsive nav menu toggle
+function toggleNavMenu() {
+  const nav = document.getElementById('mainNav');
+  nav.classList.toggle('open');
+}
 
   // Wayfinding: highlight current nav link
   document.querySelectorAll('nav a').forEach(link => {
@@ -289,6 +288,6 @@
 
   // --- Initial renders ---
   renderMembers(membersData);
-  renderSpotlights();
-  fetchWeather();
-</script>
+renderMembers(membersData);
+renderSpotlights();
+fetchWeather();
