@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join the Chamber</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .membership-card {
+      transition: all 1s ease-in-out;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .membership-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: white;
+      padding: 1em;
+      max-width: 500px;
+      border-radius: 8px;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".membership-card").forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add("visible");
+        }, index * 200);
+      });
+
+      document.querySelectorAll(".modal-link").forEach(link => {
+        link.addEventListener("click", event => {
+          event.preventDefault();
+          const modalId = link.getAttribute("data-modal");
+          document.getElementById(modalId).style.display = "flex";
+        });
+      });
+
+      document.querySelectorAll(".modal").forEach(modal => {
+        modal.addEventListener("click", e => {
+          if (e.target === modal) {
+            modal.style.display = "none";
+          }
+        });
+      });
+
+      document.getElementById("timestamp").value = new Date().toISOString();
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Chamber of Commerce</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="join.html">Join</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Join the Chamber</h2>
+    <form method="get" action="thankyou.html">
+      <label>
+        First Name:
+        <input type="text" name="firstname" title="First Name" required autocomplete="given-name" />
+      </label>
+      <label>
+        Last Name:
+        <input type="text" name="lastname" title="Last Name" required autocomplete="family-name" />
+      </label>
+      <label>
+        Organizational Title:
+        <input type="text" name="orgtitle" title="Organizational Title" autocomplete="organization-title" pattern="[A-Za-z\-\s]{7,}" />
+      </label>
+      <label>
+        Email:
+        <input type="email" name="email" title="Email" required autocomplete="email" placeholder="example@example.com" />
+      </label>
+      <label>
+        Mobile Phone:
+        <input type="tel" name="phone" title="Mobile Phone" required autocomplete="tel" />
+      </label>
+      <label>
+        Organization Name:
+        <input type="text" name="organization" title="Organization Name" required autocomplete="organization" />
+      </label>
+      <label>
+        Membership Level:
+        <select name="membership" title="Membership Level">
+          <option value="np">NP Membership (Non-Profit)</option>
+          <option value="bronze">Bronze Membership</option>
+          <option value="silver">Silver Membership</option>
+          <option value="gold">Gold Membership</option>
+        </select>
+      </label>
+      <label>
+        Business Description:
+        <textarea name="description" title="Business Description"></textarea>
+      </label>
+      <input type="hidden" name="timestamp" id="timestamp" />
+      <input type="submit" value="Submit Application" />
+    </form>
+
+    <section class="membership-cards">
+      <div class="membership-card">
+        <h3>NP Membership</h3>
+        <a href="#" class="modal-link" data-modal="modal-np">More Info</a>
+      </div>
+      <div class="membership-card">
+        <h3>Bronze Membership</h3>
+        <a href="#" class="modal-link" data-modal="modal-bronze">More Info</a>
+      </div>
+      <div class="membership-card">
+        <h3>Silver Membership</h3>
+        <a href="#" class="modal-link" data-modal="modal-silver">More Info</a>
+      </div>
+      <div class="membership-card">
+        <h3>Gold Membership</h3>
+        <a href="#" class="modal-link" data-modal="modal-gold">More Info</a>
+      </div>
+    </section>
+
+    <!-- Modals -->
+    <div class="modal" id="modal-np">
+      <div class="modal-content">
+        <h4>NP Membership Benefits</h4>
+        <p>No fee. Access to community events and basic training workshops.</p>
+      </div>
+    </div>
+    <div class="modal" id="modal-bronze">
+      <div class="modal-content">
+        <h4>Bronze Membership Benefits</h4>
+        <p>Includes training, local networking events, and advertising listings.</p>
+      </div>
+    </div>
+    <div class="modal" id="modal-silver">
+      <div class="modal-content">
+        <h4>Silver Membership Benefits</h4>
+        <p>All bronze benefits plus homepage spotlight and discounted event fees.</p>
+      </div>
+    </div>
+    <div class="modal" id="modal-gold">
+      <div class="modal-content">
+        <h4>Gold Membership Benefits</h4>
+        <p>All silver benefits plus featured spotlight, exclusive training, and premier events access.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Chamber of Commerce. All rights reserved.</p>
+  </footer>
+</body>
+</html>
