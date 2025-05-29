@@ -11,13 +11,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 2. Members Data
+  // 2. Members Data (Example Data)
   const membersData = [
-    // ... (members array unchanged)
-    // [Keep your membersData array here]
+    {
+      name: "Green Valley Farm",
+      category: "Agriculture",
+      address: "123 Jungle Rd, Bwindi",
+      phone: "+256 712 345678",
+      website: "https://greenvalley.ug",
+      membership: 3,
+      image: "green-valley.png",
+      info: "Organic farming and eco-tourism."
+    },
+    {
+      name: "Bwindi Coffee Co.",
+      category: "Retail",
+      address: "45 Hilltop Avenue, Bwindi",
+      phone: "+256 702 112233",
+      website: "https://bwindicafe.ug",
+      membership: 2,
+      image: "bwindi-coffee.png",
+      info: "Local coffee roasting and export."
+    },
+    {
+      name: "Eco Lodge Retreat",
+      category: "Hospitality",
+      address: "Lake Shore Drive, Kabale",
+      phone: "+256 776 998877",
+      website: "https://ecolodgeretreat.ug",
+      membership: 1,
+      image: "eco-lodge.png",
+      info: "Luxury eco-lodging in the wild."
+    }
   ];
+
   let currentDisplay = 'grid';
   let lastSearchResults = membersData;
+
+  function getImagePath(filename) {
+    return filename ? `images/${filename}` : 'images/default.png';
+  }
 
   function memberCardHTML(member) {
     return `
@@ -25,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="spotlight-level${member.membership === 2 ? ' silver' : member.membership === 3 ? ' gold' : ''}">
           ${member.membership === 3 ? 'Gold Member' : member.membership === 2 ? 'Silver Member' : 'Member'}
         </span>
-        ${currentDisplay === 'grid' && member.image ? `<img src="images/${member.image}" alt="${member.name} Logo">` : ''}
+        ${currentDisplay === 'grid' ? `<img src="${getImagePath(member.image)}" alt="${member.name} Logo">` : ''}
         <div class="member-name">${member.name}</div>
         <div><strong>Category:</strong> ${member.category || 'N/A'}</div>
         <div><strong>Address:</strong> ${member.address}</div>
@@ -64,7 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const query = document.getElementById('searchInput').value.trim().toLowerCase();
     const results = membersData.filter(m =>
       Object.values(m).some(val =>
-        typeof val === 'string' && val.toLowerCase().includes(query)
+        (typeof val === 'string' || typeof val === 'number') &&
+        val.toString().toLowerCase().includes(query)
       )
     );
     lastSearchResults = results.length ? results : membersData;
@@ -82,32 +116,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const spotlightsDiv = document.getElementById('spotlights');
     spotlightsDiv.innerHTML = '';
 
-    // Only Silver (2) and Gold (3) members are eligible
     const eligible = membersData.filter(m => m.membership >= 2);
-    // Shuffle and pick up to 3 unique members
     const shuffled = eligible
       .map(m => ({ m, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
       .map(({ m }) => m)
       .slice(0, 3);
 
-    // Show the names of spotlight members above the cards
     if (shuffled.length) {
-      const namesList = shuffled.map(m => m.name).join(', ');
       const namesDiv = document.createElement('div');
       namesDiv.className = 'spotlight-names';
-      namesDiv.textContent = `Spotlight Members: ${namesList}`;
+      namesDiv.textContent = `Spotlight Members: ${shuffled.map(m => m.name).join(', ')}`;
       spotlightsDiv.appendChild(namesDiv);
     }
 
     shuffled.forEach(member => {
       const card = document.createElement('div');
-      card.className = 'spotlight-card';
+      card.className = 'spotlight-card reflect';
       card.innerHTML = `
         <span class="spotlight-level${member.membership === 2 ? ' silver' : ' gold'}">
           ${member.membership === 3 ? 'Gold Member' : 'Silver Member'}
         </span>
-        ${member.image ? `<img src="images/${member.image}" alt="${member.name} Logo">` : ''}
+        <img src="${getImagePath(member.image)}" alt="${member.name} Logo">
         <h3>${member.name}</h3>
         <p><strong>Category:</strong> ${member.category || 'N/A'}</p>
         <p><strong>Address:</strong> ${member.address}</p>
@@ -117,18 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
       spotlightsDiv.appendChild(card);
     });
-
-    // Reflect effect: visually highlight the spotlight cards
-    // Add a 'reflect' class to each spotlight card for CSS reflection
-    spotlightsDiv.querySelectorAll('.spotlight-card').forEach(card => {
-      card.classList.add('reflect');
-    });
   }
 
   document.getElementById('refreshSpotlightsBtn')?.addEventListener('click', renderSpotlights);
 
   // 5. Weather Integration
-  const apiKey = "YOUR_API_KEY"; // Replace with your actual API key
+  const apiKey
   const lat = -1.2483;
   const lon = 29.9897;
 
@@ -140,7 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function fetchWeather() {
     try {
-      // Fetch current weather
       const currentRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
       const currentData = await currentRes.json();
 
@@ -153,13 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
       weatherIcon.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
       weatherIcon.style.display = "inline";
 
-      // Fetch 5-day forecast
       const forecastRes = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
       const forecastData = await forecastRes.json();
 
-      // Clear old forecast
       forecastContainer.innerHTML = "";
-
       const days = {};
       forecastData.list.forEach(item => {
         const date = new Date(item.dt_txt);
@@ -187,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       console.error("Error fetching weather data:", error);
       weatherTemp.textContent = "23°C";
-      weatherDesc.textContent = "Loading...";
+      weatherDesc.textContent = "Weather loading...";
       forecastContainer.innerHTML = '<div>Forecast Loading...</div>';
     }
   }
@@ -210,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Initial Render Calls
+  // Initial Render
   renderMembers(membersData);
   renderSpotlights();
   fetchWeather();
