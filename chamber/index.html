@@ -23,30 +23,11 @@
           <li><a href="discover.html">Discover</a></li>
           <li><a href="directory.html">Directory</a></li>
           <li><a href="join.html">Join</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
-<div id="membersDisplay"></div>
-<button id="gridBtn">Grid</button>
-<button id="listBtn">List</button>
-<form id="searchForm">
-  <input id="searchInput" />
-  <button type="submit">Search</button>
-  <button type="button" id="clearSearchBtn">Clear</button>
-</form>
-<div id="spotlights"></div>
-<button id="refreshSpotlightsBtn">Refresh Spotlights</button>
-<img id="weather-icon" style="display:none" />
-<span id="weather-temp"></span>
-<span id="weather-desc"></span>
-<div id="forecast"></div>
-<button id="refreshWeatherBtn">Refresh Weather</button>
-<form id="feedbackForm">
-  <textarea id="feedbackInput"></textarea>
-  <button type="submit">Send</button>
-</form>
-<div id="feedbackMsg"></div>
   <main class="container">
     <!-- Hero Section -->
     <section class="hero" aria-label="Welcome">
@@ -55,6 +36,22 @@
         <p>Empowering local businesses and fostering growth in the Kabale region. Connect, discover, and thrive with us!</p>
         <a href="join.html" class="cta-btn">Join the Chamber</a>
       </div>
+    </section>
+
+    <!-- Mission, Vision, Values -->
+    <section class="about-chamber" aria-label="About Chamber">
+      <h2>Our Mission</h2>
+      <p>To promote and support local businesses, advocate for economic growth, and enhance the prosperity of the Kabale community.</p>
+      <h2>Our Vision</h2>
+      <p>To be the leading voice and resource for business in Kabale, fostering a vibrant and sustainable economy.</p>
+      <h2>Our Values</h2>
+      <ul>
+        <li>Integrity</li>
+        <li>Collaboration</li>
+        <li>Innovation</li>
+        <li>Community</li>
+        <li>Excellence</li>
+      </ul>
     </section>
 
     <!-- Toggle Display Buttons -->
@@ -133,6 +130,25 @@
       <button type="button" class="refresh-spotlights-btn" id="refreshSpotlightsBtn">Show Other Spotlights</button>
     </section>
 
+    <!-- Join Section -->
+    <section aria-labelledby="join-title">
+      <h2 id="join-title">Become a Member</h2>
+      <p>Join the Kabale Chamber of Commerce to access exclusive resources, networking opportunities, and business support.</p>
+      <a href="join.html" class="cta-btn">Join Now</a>
+    </section>
+
+    <!-- Contact Section -->
+    <section aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact Us</h2>
+      <address>
+        <strong>Kabale Chamber of Commerce</strong><br>
+        P.O. Box 123, Kabale, Uganda<br>
+        Email: <a href="mailto:info@kabalechamber.org">info@kabalechamber.org</a><br>
+        Phone: <a href="tel:+256700000000">+256 700 000 000</a>
+      </address>
+      <a href="contact.html" class="cta-btn">Contact Form</a>
+    </section>
+
     <!-- Feedback Form -->
     <form class="feedback-form" id="feedbackForm" autocomplete="off" aria-label="Send Feedback" action="#">
       <label for="feedbackInput">We value your feedback! Let us know your thoughts:</label>
@@ -148,12 +164,20 @@
         <a href="https://validator.w3.org/nu/?doc=https://yourdomain.com/wdd231/chamber/index.html" target="_blank" rel="noopener">Validate HTML</a>
       </p>
       <p>&copy; 2025 Kabale Chamber of Commerce. All rights reserved.</p>
+      <p>
+        <a href="privacy.html">Privacy Policy</a> | 
+        <a href="terms.html">Terms of Service</a>
+      </p>
+      <p>
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><img src="images/facebook.svg" alt="Facebook" style="height:1.2em;"></a>
+        <a href="https://www.twitter.com/" target="_blank" rel="noopener" aria-label="Twitter"><img src="images/twitter.svg" alt="Twitter" style="height:1.2em;"></a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="images/linkedin.svg" alt="LinkedIn" style="height:1.2em;"></a>
+      </p>
     </div>
   </footer>
 
   <script src="scripts.js"></script>
   <!-- Optional image example -->
   <img src="images/hero.jpg" alt="Description of image" style="display:none;">
-</body>
 </body>
 </html>

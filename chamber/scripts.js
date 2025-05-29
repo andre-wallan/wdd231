@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 2. Members Data (Updated Company Names)
+  // 2. Members Data
   const membersData = [
     {
       name: "ByteFix",
@@ -81,11 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const getImagePath = filename => filename ? `images/${filename}` : 'images/default.png';
 
   function getMembershipLabel(level) {
-    switch (level) {
-      case 3: return { label: 'Gold Member', class: 'gold' };
-      case 2: return { label: 'Silver Member', class: 'silver' };
-      default: return { label: 'Member', class: '' };
-    }
+    if (level === 3) return { label: 'Gold Member', class: 'gold' };
+    if (level === 2) return { label: 'Silver Member', class: 'silver' };
+    return { label: 'Member', class: '' };
   }
 
   function memberCardHTML(member) {
@@ -94,12 +92,14 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="member-card">
         <span class="spotlight-level${levelClass ? ' ' + levelClass : ''}">${label}</span>
         ${currentDisplay === 'grid' ? `<img src="${getImagePath(member.image)}" alt="${member.name} Logo">` : ''}
-        <div class="member-name">${member.name}</div>
-        <div><strong>Category:</strong> ${member.category || 'N/A'}</div>
-        <div><strong>Address:</strong> ${member.address}</div>
-        <div><strong>Phone:</strong> ${member.phone}</div>
-        <div><strong>Website:</strong> <a href="${member.website}" target="_blank" rel="noopener">${member.website.replace(/^https?:\/\//, '')}</a></div>
-        ${member.info ? `<div>${member.info}</div>` : ''}
+        <div class="member-details">
+          <div class="member-name">${member.name}</div>
+          <div><strong>Category:</strong> ${member.category || 'N/A'}</div>
+          <div><strong>Address:</strong> ${member.address}</div>
+          <div><strong>Phone:</strong> ${member.phone}</div>
+          <div><strong>Website:</strong> <a href="${member.website}" target="_blank" rel="noopener">${member.website.replace(/^https?:\/\//, '')}</a></div>
+          ${member.info ? `<div>${member.info}</div>` : ''}
+        </div>
       </div>
     `;
   }
@@ -131,17 +131,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('searchInput');
   const clearSearchBtn = document.getElementById('clearSearchBtn');
 
-  searchForm?.addEventListener('submit', e => {
-    e.preventDefault();
+  function doSearch() {
     const query = searchInput.value.trim().toLowerCase();
-    const results = membersData.filter(m =>
+    lastSearchResults = membersData.filter(m =>
       Object.values(m).some(val =>
         (typeof val === 'string' || typeof val === 'number') &&
         val.toString().toLowerCase().includes(query)
       )
     );
-    lastSearchResults = results.length ? results : [];
     renderMembers(lastSearchResults);
+  }
+
+  searchForm?.addEventListener('submit', e => {
+    e.preventDefault();
+    doSearch();
   });
 
   clearSearchBtn?.addEventListener('click', () => {
@@ -163,27 +166,23 @@ document.addEventListener('DOMContentLoaded', () => {
       .slice(0, 3);
 
     if (shuffled.length) {
-      const namesDiv = document.createElement('div');
-      namesDiv.className = 'spotlight-names';
-      namesDiv.textContent = `Spotlight Members: ${shuffled.map(m => m.name).join(', ')}`;
-      spotlightsDiv.appendChild(namesDiv);
+      spotlightsDiv.innerHTML += `<div class="spotlight-names">Spotlight Members: ${shuffled.map(m => m.name).join(', ')}</div>`;
     }
 
     shuffled.forEach(member => {
       const { label, class: levelClass } = getMembershipLabel(member.membership);
-      const card = document.createElement('div');
-      card.className = 'spotlight-card reflect';
-      card.innerHTML = `
-        <span class="spotlight-level${levelClass ? ' ' + levelClass : ''}">${label}</span>
-        <img src="${getImagePath(member.image)}" alt="${member.name} Logo">
-        <h3>${member.name}</h3>
-        <p><strong>Category:</strong> ${member.category || 'N/A'}</p>
-        <p><strong>Address:</strong> ${member.address}</p>
-        <p><strong>Phone:</strong> ${member.phone}</p>
-        <p><strong>Website:</strong> <a href="${member.website}" target="_blank" rel="noopener">${member.website.replace(/^https?:\/\//, '')}</a></p>
-        ${member.info ? `<p>${member.info}</p>` : ''}
+      spotlightsDiv.innerHTML += `
+        <div class="spotlight-card reflect">
+          <span class="spotlight-level${levelClass ? ' ' + levelClass : ''}">${label}</span>
+          <img src="${getImagePath(member.image)}" alt="${member.name} Logo">
+          <h3>${member.name}</h3>
+          <p><strong>Category:</strong> ${member.category || 'N/A'}</p>
+          <p><strong>Address:</strong> ${member.address}</p>
+          <p><strong>Phone:</strong> ${member.phone}</p>
+          <p><strong>Website:</strong> <a href="${member.website}" target="_blank" rel="noopener">${member.website.replace(/^https?:\/\//, '')}</a></p>
+          ${member.info ? `<p>${member.info}</p>` : ''}
+        </div>
       `;
-      spotlightsDiv.appendChild(card);
     });
   }
 
@@ -218,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
       weatherIcon.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
       weatherIcon.style.display = "inline";
 
+      // Forecast
       forecastContainer.innerHTML = "";
       const days = {};
       forecastData.list.forEach(item => {
@@ -244,7 +244,6 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
       }).join('');
     } catch (error) {
-      console.error("Error fetching weather data:", error);
       weatherTemp.textContent = "23°C";
       weatherDesc.textContent = "Weather loading...";
       forecastContainer.innerHTML = '<div>Forecast Loading...</div>';
