@@ -117,6 +117,12 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
       spotlightsDiv.appendChild(card);
     });
+
+    // Reflect effect: visually highlight the spotlight cards
+    // Add a 'reflect' class to each spotlight card for CSS reflection
+    spotlightsDiv.querySelectorAll('.spotlight-card').forEach(card => {
+      card.classList.add('reflect');
+    });
   }
 
   document.getElementById('refreshSpotlightsBtn')?.addEventListener('click', renderSpotlights);
