@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
       phone: "+256 712 345678",
       website: "https://bytefix.ug",
       membership: 3,
-      image: "bytefix.png",
+      image: "images/bytefix.png",
       info: "Computer repair and IT consulting."
     },
     {
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
       phone: "+256 702 112233",
       website: "https://solarbright.ug",
       membership: 2,
-      image: "solarbright.png",
+      image: "images/solarbright.png",
       info: "Solar panel installation and maintenance."
     },
     {
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
       phone: "+256 776 998877",
       website: "https://technova.ug",
       membership: 1,
-      image: "technova.png",
+      image: "images/technova.png",
       info: "Tech solutions for modern businesses."
     },
     {
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
       phone: "+256 701 223344",
       website: "https://urbanfoods.ug",
       membership: 2,
-      image: "urbanfoods.png",
+      image: "images/urbanfoods.png",
       info: "Fresh groceries and organic produce."
     },
     {
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
       phone: "+256 703 334455",
       website: "https://greenharvest.ug",
       membership: 3,
-      image: "greenharvest.png",
+      image: "images/greenharvest.png",
       info: "Sustainable farming and produce supply."
     },
     {
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
       phone: "+256 704 445566",
       website: "https://safariwheels.ug",
       membership: 1,
-      image: "safariwheels.png",
+      image: "images/safariwheels.png",
       info: "Tour and travel vehicle rentals."
     }
   ];
