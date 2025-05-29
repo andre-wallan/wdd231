@@ -539,3 +539,5 @@ main {
 }
 
 /* CSS validated: https://jigsaw.w3.org/css-validator/ */
+
+/* Note: Removed invalid property 'column-break-inside'. Use 'break-inside' if you need to control column breaks. */
