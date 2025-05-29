@@ -82,7 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const spotlightsDiv = document.getElementById('spotlights');
     spotlightsDiv.innerHTML = '';
 
+    // Only Silver (2) and Gold (3) members are eligible
     const eligible = membersData.filter(m => m.membership >= 2);
+    // Shuffle and pick up to 3 unique members
     const shuffled = eligible
       .map(m => ({ m, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
@@ -98,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </span>
         ${member.image ? `<img src="images/${member.image}" alt="${member.name} Logo">` : ''}
         <h3>${member.name}</h3>
-        <p><strong>Category:</strong> ${member.category}</p>
+        <p><strong>Category:</strong> ${member.category || 'N/A'}</p>
         <p><strong>Address:</strong> ${member.address}</p>
         <p><strong>Phone:</strong> ${member.phone}</p>
         <p><strong>Website:</strong> <a href="${member.website}" target="_blank" rel="noopener">${member.website.replace(/^https?:\/\//, '')}</a></p>

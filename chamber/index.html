@@ -107,12 +107,69 @@
     <section aria-labelledby="spotlights-title">
       <h2 id="spotlights-title">Member Spotlights</h2>
       <div class="spotlights" id="spotlights">
-        <noscript>
-          <p>Spotlights are unavailable without JavaScript.</p>
-        </noscript>
+      <noscript>
+        <p>Spotlights are unavailable without JavaScript.</p>
+      </noscript>
       </div>
       <button type="button" class="refresh-spotlights-btn" id="refreshSpotlightsBtn">Show Other Spotlights</button>
     </section>
+    <script>
+    
+      const spotlightMembers = [
+      {
+        name: "Kabale Coffee Roasters",
+        image: "images/members/coffee.jpg",
+        desc: "Award-winning local coffee producer.",
+        link: "directory.html#kabale-coffee"
+      },
+      {
+        name: "Lake Bunyonyi Tours",
+        image: "images/members/tours.jpg",
+        desc: "Explore Kabale with expert guides.",
+        link: "directory.html#lake-bunyonyi"
+      },
+      {
+        name: "Rwenzori Tech Solutions",
+        image: "images/members/tech.jpg",
+        desc: "Innovative IT services for your business.",
+        link: "directory.html#rwenzori-tech"
+      },
+      {
+        name: "Kabale Handicrafts",
+        image: "images/members/handicrafts.jpg",
+        desc: "Authentic handmade crafts from Kabale.",
+        link: "directory.html#kabale-handicrafts"
+      }
+      ];
+
+      function getRandomSpotlights(count = 2) {
+      const shuffled = [...spotlightMembers].sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, count);
+      }
+
+      function showSpotlights() {
+      const spotlightsDiv = document.getElementById('spotlights');
+      spotlightsDiv.innerHTML = '';
+      const spotlights = getRandomSpotlights();
+      spotlights.forEach(member => {
+        const spotlight = document.createElement('div');
+        spotlight.className = 'spotlight-member';
+        spotlight.innerHTML = `
+        <a href="${member.link}">
+          <img src="${member.image}" alt="${member.name} logo">
+          <h3>${member.name}</h3>
+        </a>
+        <p>${member.desc}</p>
+        `;
+        spotlightsDiv.appendChild(spotlight);
+      });
+      }
+
+      document.getElementById('refreshSpotlightsBtn').addEventListener('click', showSpotlights);
+
+      // Show spotlights on page load
+      showSpotlights();
+    </script>
 
     <!-- Feedback Form -->
     <form class="feedback-form" id="feedbackForm" autocomplete="off" aria-label="Send Feedback" action="#">
