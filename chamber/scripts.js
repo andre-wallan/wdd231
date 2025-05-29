@@ -199,7 +199,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('refreshSpotlightsBtn')?.addEventListener('click', renderSpotlights);
 
 // 5. Weather Integration
-  const apiKey = "https://api.openweathermap.org/data/2.5/weather?lat=${kabaleLat}&lon=${kabaleLon}&appid=${apiKey}&units=metric"; // <-- Replace with your actual API key
+  const apiKey = "https://api.openweathermap.org/data/2.5/weather?lat={-1.2483}&lon={29.9897}&appid={API key}"; // Replace with your actual API key
+//api.openweathermap.org/data/2.5/weather?lat=${kabaleLat}&lon=${kabaleLon}&appid=${apiKey}&units=metric"; // <-- Replace with your actual API key
   const kabaleLat = -1.2483;
   const kabaleLon = 29.9897;
 
