@@ -1,18 +1,17 @@
-// Responsive nav menu toggle
-function toggleNavMenu() {
-  const nav = document.getElementById('mainNav');
-  nav.classList.toggle('open');
-}
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Navigation Menu and Wayfinding
+  document.getElementById('menuToggle')?.addEventListener('click', () => {
+    document.getElementById('mainNav')?.classList.toggle('open');
+  });
 
-  // Wayfinding: highlight current nav link
   document.querySelectorAll('nav a').forEach(link => {
-    if (link.href && window.location.href.includes(link.getAttribute('href'))) {
+    if (window.location.href.includes(link.getAttribute('href'))) {
       link.classList.add('active');
       link.setAttribute('aria-current', 'page');
     }
   });
 
-  // Chamber members data
+  // 2. Members Data
   const membersData = [
     {
       name: "Green Hills Coffee",
@@ -105,8 +104,6 @@ function toggleNavMenu() {
       info: "Renewable energy company specializing in solar panels."
     }
   ];
-
-  // --- Member Display Toggle ---
   let currentDisplay = 'grid';
   let lastSearchResults = membersData;
 
@@ -129,15 +126,9 @@ function toggleNavMenu() {
 
   function renderMembers(members) {
     const container = document.getElementById('membersDisplay');
-    if (!members || !members.length) {
-      container.innerHTML = '<p style="margin:1.2rem 0;">No members found.</p>';
-      return;
-    }
-    container.innerHTML = `<div class="members-${currentDisplay}">${members.map(memberCardHTML).join('')}</div>`;
-  }
-
-  function filteredMembers() {
-    return lastSearchResults;
+    container.innerHTML = members.length
+      ? `<div class="members-${currentDisplay}">${members.map(memberCardHTML).join('')}</div>`
+      : '<p style="margin:1.2rem 0;">No members found.</p>';
   }
 
   function toggleDisplay(view) {
@@ -145,62 +136,57 @@ function toggleNavMenu() {
       currentDisplay = view;
       ['grid', 'list'].forEach(type => {
         const btn = document.getElementById(type + 'Btn');
-        btn.classList.toggle('active', type === view);
-        btn.setAttribute('aria-pressed', type === view);
+        btn?.classList.toggle('active', type === view);
+        btn?.setAttribute('aria-pressed', type === view);
       });
-      renderMembers(filteredMembers());
+      renderMembers(lastSearchResults);
     }
   }
 
-  document.getElementById('gridBtn').addEventListener('click', () => toggleDisplay('grid'));
-  document.getElementById('listBtn').addEventListener('click', () => toggleDisplay('list'));
+  document.getElementById('gridBtn')?.addEventListener('click', () => toggleDisplay('grid'));
+  document.getElementById('listBtn')?.addEventListener('click', () => toggleDisplay('list'));
 
-  // --- Search ---
-  function renderSearchResults(results) {
-    lastSearchResults = results.length ? results : membersData;
-    renderMembers(lastSearchResults);
-  }
-
-  document.getElementById('searchForm').addEventListener('submit', function (e) {
+  // 3. Search Feature
+  document.getElementById('searchForm')?.addEventListener('submit', e => {
     e.preventDefault();
     const query = document.getElementById('searchInput').value.trim().toLowerCase();
-    if (!query) {
-      renderSearchResults(membersData);
-      return;
-    }
     const results = membersData.filter(m =>
       Object.values(m).some(val =>
         typeof val === 'string' && val.toLowerCase().includes(query)
       )
     );
-    renderSearchResults(results);
+    lastSearchResults = results.length ? results : membersData;
+    renderMembers(lastSearchResults);
   });
 
-  document.getElementById('clearSearchBtn').addEventListener('click', function () {
+  document.getElementById('clearSearchBtn')?.addEventListener('click', () => {
     document.getElementById('searchInput').value = '';
-    renderSearchResults(membersData);
+    lastSearchResults = membersData;
+    renderMembers(lastSearchResults);
   });
 
-  // --- Spotlights ---
+  // 4. Spotlight Members
   function renderSpotlights() {
     const spotlightsDiv = document.getElementById('spotlights');
     spotlightsDiv.innerHTML = '';
-    const eligible = membersData.filter(m => m.membership === 2 || m.membership === 3);
+
+    const eligible = membersData.filter(m => m.membership >= 2);
     const shuffled = eligible
       .map(m => ({ m, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
       .map(({ m }) => m)
       .slice(0, 3);
+
     shuffled.forEach(member => {
       const card = document.createElement('div');
       card.className = 'spotlight-card';
       card.innerHTML = `
-        <span class="spotlight-level${member.membership === 2 ? ' silver' : member.membership === 3 ? ' gold' : ''}">
+        <span class="spotlight-level${member.membership === 2 ? ' silver' : ' gold'}">
           ${member.membership === 3 ? 'Gold Member' : 'Silver Member'}
         </span>
         ${member.image ? `<img src="images/${member.image}" alt="${member.name} Logo">` : ''}
         <h3>${member.name}</h3>
-        <p><strong>Category:</strong> ${member.category || 'N/A'}</p>
+        <p><strong>Category:</strong> ${member.category}</p>
         <p><strong>Address:</strong> ${member.address}</p>
         <p><strong>Phone:</strong> ${member.phone}</p>
         <p><strong>Website:</strong> <a href="${member.website}" target="_blank" rel="noopener">${member.website.replace(/^https?:\/\//, '')}</a></p>
@@ -210,97 +196,87 @@ function toggleNavMenu() {
     });
   }
 
-  document.getElementById('refreshSpotlightsBtn').addEventListener('click', renderSpotlights);
+  document.getElementById('refreshSpotlightsBtn')?.addEventListener('click', renderSpotlights);
 
-  // --- Weather ---
+  // 5. Weather Integration
   const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY';
-  const kabaleLat = -1.2486;
-  const kabaleLon = 29.9897;
+  const lat = -1.2486;
+  const lon = 29.9897;
 
   function fetchWeather() {
-    // Current weather
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${kabaleLat}&lon=${kabaleLon}&appid=${apiKey}&units=metric`)
+    const tempEl = document.getElementById('weather-temp');
+    const descEl = document.getElementById('weather-desc');
+    const iconEl = document.getElementById('weather-icon');
+    const forecastDiv = document.getElementById('forecast');
+
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
       .then(res => res.json())
       .then(data => {
-        document.getElementById('weather-temp').textContent = Math.round(data.main.temp) + '°C';
-        document.getElementById('weather-desc').textContent = data.weather[0].description;
-        const icon = data.weather[0].icon;
-        const iconImg = document.getElementById('weather-icon');
-        iconImg.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
-        iconImg.alt = data.weather[0].description;
-        iconImg.style.display = 'inline-block';
+        tempEl.textContent = Math.round(data.main.temp) + '°C';
+        descEl.textContent = data.weather[0].description;
+        iconEl.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+        iconEl.alt = data.weather[0].description;
+        iconEl.style.display = 'inline-block';
       })
       .catch(() => {
-        document.getElementById('weather-temp').textContent = '--°C';
-        document.getElementById('weather-desc').textContent = 'Weather unavailable';
-        document.getElementById('weather-icon').style.display = 'none';
+        tempEl.textContent = '--°C';
+        descEl.textContent = 'Weather unavailable';
+        iconEl.style.display = 'none';
       });
 
-    // 3-day forecast
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${kabaleLat}&lon=${kabaleLon}&appid=${apiKey}&units=metric`)
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
       .then(res => res.json())
       .then(data => {
-        const forecastDiv = document.getElementById('forecast');
-        forecastDiv.innerHTML = '';
-        // Group forecast by day
         const days = {};
         data.list.forEach(item => {
           const date = new Date(item.dt_txt);
-          const dayKey = date.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' });
-          if (!days[dayKey]) days[dayKey] = [];
-          days[dayKey].push(item);
+          const key = date.toLocaleDateString();
+          if (!days[key]) days[key] = [];
+          days[key].push(item);
         });
-        // Get today and next 3 days
-        const todayKey = new Date().toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' });
-        const dayKeys = Object.keys(days).filter(d => d >= todayKey).slice(0, 4); // today + next 3
-        dayKeys.forEach((day, idx) => {
-          // Skip today, show next 3 days
-          if (idx === 0) return;
-          const items = days[day];
-          const temps = items.map(i => i.main.temp);
-          const avgTemp = Math.round(temps.reduce((a, b) => a + b, 0) / temps.length);
-          const midItem = items[Math.floor(items.length / 2)];
-          const icon = midItem.weather[0].icon;
-          const desc = midItem.weather[0].description;
-          const dayLabel = new Date(items[0].dt_txt).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
-          forecastDiv.innerHTML += `
+
+        const dayKeys = Object.keys(days).slice(1, 4);
+        forecastDiv.innerHTML = dayKeys.map(key => {
+          const items = days[key];
+          const avgTemp = Math.round(items.reduce((a, b) => a + b.main.temp, 0) / items.length);
+          const icon = items[0].weather[0].icon;
+          const desc = items[0].weather[0].description;
+          const label = new Date(items[0].dt_txt).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
+
+          return `
             <div class="forecast-day">
-              <div>${dayLabel}</div>
+              <div>${label}</div>
               <img src="https://openweathermap.org/img/wn/${icon}.png" alt="${desc}" title="${desc}">
               <div>${avgTemp}°C</div>
             </div>
           `;
-        });
-        // If no forecast, show message
-        if (forecastDiv.innerHTML === '') {
-          forecastDiv.innerHTML = '<div>Forecast unavailable</div>';
-        }
+        }).join('');
       })
       .catch(() => {
-        document.getElementById('forecast').innerHTML = '<div>Forecast unavailable</div>';
+        forecastDiv.innerHTML = '<div>Forecast unavailable</div>';
       });
   }
 
-  document.getElementById('refreshWeatherBtn').addEventListener('click', fetchWeather);
+  document.getElementById('refreshWeatherBtn')?.addEventListener('click', fetchWeather);
 
-  // --- Feedback Form ---
-  document.getElementById('feedbackForm').addEventListener('submit', function (e) {
+  // 6. Feedback Form
+  document.getElementById('feedbackForm')?.addEventListener('submit', e => {
     e.preventDefault();
     const feedback = document.getElementById('feedbackInput').value.trim();
     const msgDiv = document.getElementById('feedbackMsg');
     if (feedback.length < 2) {
       msgDiv.textContent = "Please enter your feedback.";
       msgDiv.style.color = "red";
-      return;
+    } else {
+      msgDiv.textContent = "Thank you for your feedback!";
+      msgDiv.style.color = "green";
+      document.getElementById('feedbackInput').value = '';
+      setTimeout(() => { msgDiv.textContent = ''; }, 4000);
     }
-    msgDiv.textContent = "Thank you for your feedback!";
-    msgDiv.style.color = "green";
-    document.getElementById('feedbackInput').value = '';
-    setTimeout(() => { msgDiv.textContent = ''; }, 4000);
   });
 
-  // --- Initial renders ---
+  // Initial Render Calls
   renderMembers(membersData);
-renderMembers(membersData);
-renderSpotlights();
-fetchWeather();
+  renderSpotlights();
+  fetchWeather();
+});

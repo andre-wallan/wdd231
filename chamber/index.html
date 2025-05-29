@@ -13,9 +13,7 @@
   <header>
     <div class="container nav-wrapper">
       <h1>Kabale Chamber of Commerce</h1>
-      <button class="nav-toggle" aria-label="Toggle navigation">
-        &#9776;
-      </button>
+      <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
       <nav>
         <ul id="mainNav">
           <li><a href="index.html" class="active" aria-current="page">Home</a></li>
@@ -44,7 +42,7 @@
     </div>
 
     <!-- Search Members -->
-    <form class="search-form" id="searchForm" autocomplete="off" aria-label="Search Chamber Members">
+    <form class="search-form" id="searchForm" autocomplete="off" aria-label="Search Chamber Members" action="#">
       <label for="searchInput">Search Chamber Members:</label>
       <input type="text" id="searchInput" placeholder="Enter name, category, or address..." />
       <button type="submit">Search</button>
@@ -54,8 +52,9 @@
 
     <!-- Members Display -->
     <div class="members-display" id="membersDisplay">
-      <!-- Members will be listed here. (No JS: static content or message) -->
-      <p style="margin:1.2rem 0;">Member listing is unavailable without JavaScript.</p>
+      <noscript>
+        <p style="margin:1.2rem 0;">Member listing is unavailable without JavaScript.</p>
+      </noscript>
     </div>
 
     <div class="main-sections">
@@ -86,14 +85,16 @@
         <h2 id="weather-title">Kabale Weather</h2>
         <div id="weather">
           <div class="weather-today">
-            <img id="weather-icon" src="" alt="" style="display:none;">
+            <img id="weather-icon" src="" alt="Weather icon" style="display:none;">
             <div>
               <span id="weather-temp">--°C</span>
               <span id="weather-desc"></span>
             </div>
           </div>
           <div class="forecast" id="forecast">
-            <div>Weather information is unavailable without JavaScript.</div>
+            <noscript>
+              <div>Weather information is unavailable without JavaScript.</div>
+            </noscript>
           </div>
         </div>
         <button type="button" class="refresh-spotlights-btn" id="refreshWeatherBtn">Refresh Weather</button>
@@ -104,13 +105,15 @@
     <section aria-labelledby="spotlights-title">
       <h2 id="spotlights-title">Member Spotlights</h2>
       <div class="spotlights" id="spotlights">
-        <p>Spotlights are unavailable without JavaScript.</p>
+        <noscript>
+          <p>Spotlights are unavailable without JavaScript.</p>
+        </noscript>
       </div>
       <button type="button" class="refresh-spotlights-btn" id="refreshSpotlightsBtn">Show Other Spotlights</button>
     </section>
 
     <!-- Feedback Form -->
-    <form class="feedback-form" id="feedbackForm" autocomplete="off" aria-label="Send Feedback">
+    <form class="feedback-form" id="feedbackForm" autocomplete="off" aria-label="Send Feedback" action="#">
       <label for="feedbackInput">We value your feedback! Let us know your thoughts:</label>
       <textarea id="feedbackInput" required placeholder="Type your feedback here..."></textarea>
       <button type="submit">Send Feedback</button>
@@ -126,10 +129,10 @@
       <p>&copy; 2025 Kabale Chamber of Commerce. All rights reserved.</p>
     </div>
   </footer>
+
   <script src="scripts/scripts.js"></script>
-  <img src="images.jpg"
-  <link rel="stylesheet" href="stylesheets/styles.css">
-  <!-- If you want to include another stylesheet, use <link rel="stylesheet" href="stylesheets/styles.css"> -->
-  <!-- If you want to display an image, use <img src="images.jpg" alt="Description of image"> -->
+
+  <!-- Optional image example -->
+  <img src="images.jpg" alt="Description of image" style="display:none;" />
 </body>
 </html>
