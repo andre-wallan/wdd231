@@ -198,29 +198,75 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('refreshSpotlightsBtn')?.addEventListener('click', renderSpotlights);
 
-  // 5. Weather Integration
-  const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY';
-  const lat = -1.2486;
-  const lon = 29.9897;
+// 5. Weather Integration
+  const apiKey = "https://api.openweathermap.org/data/2.5/weather?lat=${kabaleLat}&lon=${kabaleLon}&appid=${apiKey}&units=metric"; // <-- Replace with your actual API key
+  const kabaleLat = -1.2483;
+  const kabaleLon = 29.9897;
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const weatherConditions = [
-        { description: 'Clear sky', icon: '01d' },
-        { description: 'Few clouds', icon: '02d' },
-        { description: 'Scattered clouds', icon: '03d' },
-        { description: 'Broken clouds', icon: '04d' },
-        { description: 'Shower rain', icon: '09d' },
-        { description: 'Rain', icon: '10d' },
-        { description: 'Thunderstorm', icon: '11d' },
-        { description: 'Snow', icon: '13d' },
-        { description: 'Mist', icon: '50d' }
-      ];
+  const weatherIcon = document.getElementById("weather-icon");
+  const weatherTemp = document.getElementById("weather-temp");
+  const weatherDesc = document.getElementById("weather-desc");
+  const forecastContainer = document.getElementById("forecast");
+  const refreshBtn = document.getElementById("refreshWeatherBtn");
 
-      function getRandomWeather() {
-        const condition = weatherConditions[Math.floor(Math.random() * weatherConditions.length)];
-        const temperature = (Math.random() * 15 + 20).toFixed(1); // Random temp between 20°C and 35°C
-        return { temperature, condition };
-      }
+  async function fetchWeather() {
+    try {
+      // Fetch current weather
+      const currentRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${kabaleLat}&lon=${kabaleLon}&appid=${apiKey}&units=metric`);
+      const currentData = await currentRes.json();
+
+      const { temp } = currentData.main;
+      const description = currentData.weather[0].description;
+      const icon = currentData.weather[0].icon;
+
+      weatherTemp.textContent = `${Math.round(temp)}°C`;
+      weatherDesc.textContent = description.charAt(0).toUpperCase() + description.slice(1);
+      weatherIcon.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+      weatherIcon.style.display = "inline";
+
+      // Fetch 5-day forecast
+      const forecastRes = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${kabaleLat}&lon=${kabaleLon}&appid=${apiKey}&units=metric`);
+      const forecastData = await forecastRes.json();
+
+      // Clear old forecast
+      forecastContainer.innerHTML = "";
+
+      const dailyMap = new Map();
+
+      // Get one forecast per day (around noon)
+      forecastData.list.forEach(item => {
+        const date = item.dt_txt.split(" ")[0];
+        const hour = item.dt_txt.split(" ")[1].split(":")[0];
+
+        if (hour === "12" && !dailyMap.has(date)) {
+          dailyMap.set(date, item);
+        }
+      });
+
+      dailyMap.forEach((item, date) => {
+        const iconUrl = `https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`;
+        const temp = Math.round(item.main.temp);
+        const desc = item.weather[0].description;
+
+        const forecastEl = document.createElement("div");
+        forecastEl.classList.add("forecast-day");
+        forecastEl.innerHTML = `
+          <div><strong>${new Date(date).toLocaleDateString(undefined, { weekday: 'short' })}</strong></div>
+          <img src="${iconUrl}" alt="${desc}">
+          <div>${temp}°C</div>
+        `;
+        forecastContainer.appendChild(forecastEl);
+      });
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+      weatherTemp.textContent = "--°C";
+      weatherDesc.textContent = "Unavailable";
+    }
+  }
+
+  // Load weather on page load and button click
+  document.addEventListener("DOMContentLoaded", fetchWeather);
+  refreshBtn.addEventListener("click", fetchWeather);
 
       function displayWeather() {
         const { temperature, condition } = getRandomWeather();
