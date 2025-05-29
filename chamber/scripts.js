@@ -203,6 +203,40 @@ document.addEventListener('DOMContentLoaded', () => {
   const lat = -1.2486;
   const lon = 29.9897;
 
+    document.addEventListener('DOMContentLoaded', () => {
+      const weatherConditions = [
+        { description: 'Clear sky', icon: '01d' },
+        { description: 'Few clouds', icon: '02d' },
+        { description: 'Scattered clouds', icon: '03d' },
+        { description: 'Broken clouds', icon: '04d' },
+        { description: 'Shower rain', icon: '09d' },
+        { description: 'Rain', icon: '10d' },
+        { description: 'Thunderstorm', icon: '11d' },
+        { description: 'Snow', icon: '13d' },
+        { description: 'Mist', icon: '50d' }
+      ];
+
+      function getRandomWeather() {
+        const condition = weatherConditions[Math.floor(Math.random() * weatherConditions.length)];
+        const temperature = (Math.random() * 15 + 20).toFixed(1); // Random temp between 20°C and 35°C
+        return { temperature, condition };
+      }
+
+      function displayWeather() {
+        const { temperature, condition } = getRandomWeather();
+        const tempEl = document.getElementById('weather-temp');
+        const descEl = document.getElementById('weather-desc');
+        const iconEl = document.getElementById('weather-icon');
+
+        tempEl.textContent = `${temperature}°C`;
+        descEl.textContent = condition.description;
+        iconEl.src = `https://openweathermap.org/img/wn/${condition.icon}@2x.png`;
+        iconEl.alt = condition.description;
+        iconEl.style.display = 'inline-block';
+      }
+
+      displayWeather();
+    });
   function fetchWeather() {
     const tempEl = document.getElementById('weather-temp');
     const descEl = document.getElementById('weather-desc');
