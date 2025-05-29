@@ -91,6 +91,15 @@ document.addEventListener('DOMContentLoaded', () => {
       .map(({ m }) => m)
       .slice(0, 3);
 
+    // Show the names of spotlight members above the cards
+    if (shuffled.length) {
+      const namesList = shuffled.map(m => m.name).join(', ');
+      const namesDiv = document.createElement('div');
+      namesDiv.className = 'spotlight-names';
+      namesDiv.textContent = `Spotlight Members: ${namesList}`;
+      spotlightsDiv.appendChild(namesDiv);
+    }
+
     shuffled.forEach(member => {
       const card = document.createElement('div');
       card.className = 'spotlight-card';
