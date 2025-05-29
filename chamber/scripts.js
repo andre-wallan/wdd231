@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
   async function fetchWeather() {
     try {
       // Fetch current weather
-      const currentRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${kabaleLat}&lon=${kabaleLon}&appid=${apiKey}&units=metric`);
+      const currentRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat={-1.2483}&lon={29.9897}&appid={API key}`);
       const currentData = await currentRes.json();
 
       const { temp } = currentData.main;
@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
       weatherIcon.style.display = "inline";
 
       // Fetch 5-day forecast
-      const forecastRes = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${kabaleLat}&lon=${kabaleLon}&appid=${apiKey}&units=metric`);
+      const forecastRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat={-1.2483}&lon={29.9897}&appid={API key}`);
       const forecastData = await forecastRes.json();
 
       // Clear old forecast
