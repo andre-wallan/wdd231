@@ -218,6 +218,7 @@ function toggleNavMenu() {
   const kabaleLon = 29.9897;
 
   function fetchWeather() {
+    // Current weather
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${kabaleLat}&lon=${kabaleLon}&appid=${apiKey}&units=metric`)
       .then(res => res.json())
       .then(data => {
@@ -235,33 +236,45 @@ function toggleNavMenu() {
         document.getElementById('weather-icon').style.display = 'none';
       });
 
+    // 3-day forecast
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${kabaleLat}&lon=${kabaleLon}&appid=${apiKey}&units=metric`)
       .then(res => res.json())
       .then(data => {
         const forecastDiv = document.getElementById('forecast');
         forecastDiv.innerHTML = '';
+        // Group forecast by day
         const days = {};
         data.list.forEach(item => {
           const date = new Date(item.dt_txt);
-          const day = date.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
-          if (!days[day]) days[day] = [];
-          days[day].push(item);
+          const dayKey = date.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' });
+          if (!days[dayKey]) days[dayKey] = [];
+          days[dayKey].push(item);
         });
-        const today = new Date().toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
-        const dayNames = Object.keys(days).filter(d => d !== today);
-        dayNames.slice(0, 3).forEach(day => {
-          const temps = days[day].map(i => i.main.temp);
+        // Get today and next 3 days
+        const todayKey = new Date().toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' });
+        const dayKeys = Object.keys(days).filter(d => d >= todayKey).slice(0, 4); // today + next 3
+        dayKeys.forEach((day, idx) => {
+          // Skip today, show next 3 days
+          if (idx === 0) return;
+          const items = days[day];
+          const temps = items.map(i => i.main.temp);
           const avgTemp = Math.round(temps.reduce((a, b) => a + b, 0) / temps.length);
-          const icon = days[day][Math.floor(days[day].length / 2)].weather[0].icon;
-          const desc = days[day][Math.floor(days[day].length / 2)].weather[0].description;
+          const midItem = items[Math.floor(items.length / 2)];
+          const icon = midItem.weather[0].icon;
+          const desc = midItem.weather[0].description;
+          const dayLabel = new Date(items[0].dt_txt).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
           forecastDiv.innerHTML += `
             <div class="forecast-day">
-              <div>${day}</div>
+              <div>${dayLabel}</div>
               <img src="https://openweathermap.org/img/wn/${icon}.png" alt="${desc}" title="${desc}">
               <div>${avgTemp}°C</div>
             </div>
           `;
         });
+        // If no forecast, show message
+        if (forecastDiv.innerHTML === '') {
+          forecastDiv.innerHTML = '<div>Forecast unavailable</div>';
+        }
       })
       .catch(() => {
         document.getElementById('forecast').innerHTML = '<div>Forecast unavailable</div>';
