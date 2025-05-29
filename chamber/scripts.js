@@ -1,63 +1,98 @@
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Navigation Menu and Wayfinding
-  document.getElementById('menuToggle')?.addEventListener('click', () => {
-    document.getElementById('mainNav')?.classList.toggle('open');
-  });
+  const menuToggle = document.getElementById('menuToggle');
+  const mainNav = document.getElementById('mainNav');
+  menuToggle?.addEventListener('click', () => mainNav?.classList.toggle('open'));
 
   document.querySelectorAll('nav a').forEach(link => {
-    if (window.location.href.includes(link.getAttribute('href'))) {
+    if (window.location.pathname.endsWith(link.getAttribute('href'))) {
       link.classList.add('active');
       link.setAttribute('aria-current', 'page');
     }
   });
 
-  // 2. Members Data (Example Data)
+  // 2. Members Data (Updated Company Names)
   const membersData = [
     {
-      name: "Green Valley Farm",
-      category: "Agriculture",
-      address: "123 Jungle Rd, Bwindi",
+      name: "ByteFix",
+      category: "IT Services",
+      address: "123 Tech Lane, Bwindi",
       phone: "+256 712 345678",
-      website: "https://greenvalley.ug",
+      website: "https://bytefix.ug",
       membership: 3,
-      image: "green-valley.png",
-      info: "Organic farming and eco-tourism."
+      image: "bytefix.png",
+      info: "Computer repair and IT consulting."
     },
     {
-      name: "Bwindi Coffee Co.",
-      category: "Retail",
-      address: "45 Hilltop Avenue, Bwindi",
+      name: "SolarBright",
+      category: "Energy",
+      address: "45 Solar Avenue, Bwindi",
       phone: "+256 702 112233",
-      website: "https://bwindicafe.ug",
+      website: "https://solarbright.ug",
       membership: 2,
-      image: "bwindi-coffee.png",
-      info: "Local coffee roasting and export."
+      image: "solarbright.png",
+      info: "Solar panel installation and maintenance."
     },
     {
-      name: "Eco Lodge Retreat",
-      category: "Hospitality",
-      address: "Lake Shore Drive, Kabale",
+      name: "TechNova",
+      category: "Technology",
+      address: "Innovation Park, Kabale",
       phone: "+256 776 998877",
-      website: "https://ecolodgeretreat.ug",
+      website: "https://technova.ug",
       membership: 1,
-      image: "eco-lodge.png",
-      info: "Luxury eco-lodging in the wild."
+      image: "technova.png",
+      info: "Tech solutions for modern businesses."
+    },
+    {
+      name: "UrbanFoods",
+      category: "Retail",
+      address: "Market Street, Bwindi",
+      phone: "+256 701 223344",
+      website: "https://urbanfoods.ug",
+      membership: 2,
+      image: "urbanfoods.png",
+      info: "Fresh groceries and organic produce."
+    },
+    {
+      name: "Green Harvest",
+      category: "Agriculture",
+      address: "Harvest Road, Bwindi",
+      phone: "+256 703 334455",
+      website: "https://greenharvest.ug",
+      membership: 3,
+      image: "greenharvest.png",
+      info: "Sustainable farming and produce supply."
+    },
+    {
+      name: "SafariWheels",
+      category: "Transport",
+      address: "Safari Drive, Kabale",
+      phone: "+256 704 445566",
+      website: "https://safariwheels.ug",
+      membership: 1,
+      image: "safariwheels.png",
+      info: "Tour and travel vehicle rentals."
     }
   ];
 
   let currentDisplay = 'grid';
   let lastSearchResults = membersData;
 
-  function getImagePath(filename) {
-    return filename ? `images/${filename}` : 'images/default.png';
+  const getImagePath = filename => filename ? `images/${filename}` : 'images/default.png';
+
+  function getMembershipLabel(level) {
+    switch (level) {
+      case 3: return { label: 'Gold Member', class: 'gold' };
+      case 2: return { label: 'Silver Member', class: 'silver' };
+      default: return { label: 'Member', class: '' };
+    }
   }
 
   function memberCardHTML(member) {
+    const { label, class: levelClass } = getMembershipLabel(member.membership);
     return `
       <div class="member-card">
-        <span class="spotlight-level${member.membership === 2 ? ' silver' : member.membership === 3 ? ' gold' : ''}">
-          ${member.membership === 3 ? 'Gold Member' : member.membership === 2 ? 'Silver Member' : 'Member'}
-        </span>
+        <span class="spotlight-level${levelClass ? ' ' + levelClass : ''}">${label}</span>
         ${currentDisplay === 'grid' ? `<img src="${getImagePath(member.image)}" alt="${member.name} Logo">` : ''}
         <div class="member-name">${member.name}</div>
         <div><strong>Category:</strong> ${member.category || 'N/A'}</div>
@@ -92,21 +127,25 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('listBtn')?.addEventListener('click', () => toggleDisplay('list'));
 
   // 3. Search Feature
-  document.getElementById('searchForm')?.addEventListener('submit', e => {
+  const searchForm = document.getElementById('searchForm');
+  const searchInput = document.getElementById('searchInput');
+  const clearSearchBtn = document.getElementById('clearSearchBtn');
+
+  searchForm?.addEventListener('submit', e => {
     e.preventDefault();
-    const query = document.getElementById('searchInput').value.trim().toLowerCase();
+    const query = searchInput.value.trim().toLowerCase();
     const results = membersData.filter(m =>
       Object.values(m).some(val =>
         (typeof val === 'string' || typeof val === 'number') &&
         val.toString().toLowerCase().includes(query)
       )
     );
-    lastSearchResults = results.length ? results : membersData;
+    lastSearchResults = results.length ? results : [];
     renderMembers(lastSearchResults);
   });
 
-  document.getElementById('clearSearchBtn')?.addEventListener('click', () => {
-    document.getElementById('searchInput').value = '';
+  clearSearchBtn?.addEventListener('click', () => {
+    searchInput.value = '';
     lastSearchResults = membersData;
     renderMembers(lastSearchResults);
   });
@@ -131,12 +170,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     shuffled.forEach(member => {
+      const { label, class: levelClass } = getMembershipLabel(member.membership);
       const card = document.createElement('div');
       card.className = 'spotlight-card reflect';
       card.innerHTML = `
-        <span class="spotlight-level${member.membership === 2 ? ' silver' : ' gold'}">
-          ${member.membership === 3 ? 'Gold Member' : 'Silver Member'}
-        </span>
+        <span class="spotlight-level${levelClass ? ' ' + levelClass : ''}">${label}</span>
         <img src="${getImagePath(member.image)}" alt="${member.name} Logo">
         <h3>${member.name}</h3>
         <p><strong>Category:</strong> ${member.category || 'N/A'}</p>
@@ -152,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('refreshSpotlightsBtn')?.addEventListener('click', renderSpotlights);
 
   // 5. Weather Integration
-  const apiKey
+  const apiKey = "API_KEY";
   const lat = -1.2483;
   const lon = 29.9897;
 
@@ -164,8 +202,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function fetchWeather() {
     try {
-      const currentRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
+      const [currentRes, forecastRes] = await Promise.all([
+        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`),
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
+      ]);
       const currentData = await currentRes.json();
+      const forecastData = await forecastRes.json();
 
       const { temp } = currentData.main;
       const description = currentData.weather[0].description;
@@ -175,9 +217,6 @@ document.addEventListener('DOMContentLoaded', () => {
       weatherDesc.textContent = description.charAt(0).toUpperCase() + description.slice(1);
       weatherIcon.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
       weatherIcon.style.display = "inline";
-
-      const forecastRes = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
-      const forecastData = await forecastRes.json();
 
       forecastContainer.innerHTML = "";
       const days = {};
@@ -215,18 +254,21 @@ document.addEventListener('DOMContentLoaded', () => {
   refreshBtn?.addEventListener("click", fetchWeather);
 
   // 6. Feedback Form
-  document.getElementById('feedbackForm')?.addEventListener('submit', e => {
+  const feedbackForm = document.getElementById('feedbackForm');
+  const feedbackInput = document.getElementById('feedbackInput');
+  const feedbackMsg = document.getElementById('feedbackMsg');
+
+  feedbackForm?.addEventListener('submit', e => {
     e.preventDefault();
-    const feedback = document.getElementById('feedbackInput').value.trim();
-    const msgDiv = document.getElementById('feedbackMsg');
+    const feedback = feedbackInput.value.trim();
     if (feedback.length < 2) {
-      msgDiv.textContent = "Please enter your feedback.";
-      msgDiv.style.color = "red";
+      feedbackMsg.textContent = "Please enter your feedback.";
+      feedbackMsg.style.color = "red";
     } else {
-      msgDiv.textContent = "Thank you for your feedback!";
-      msgDiv.style.color = "green";
-      document.getElementById('feedbackInput').value = '';
-      setTimeout(() => { msgDiv.textContent = ''; }, 4000);
+      feedbackMsg.textContent = "Thank you for your feedback!";
+      feedbackMsg.style.color = "green";
+      feedbackInput.value = '';
+      setTimeout(() => { feedbackMsg.textContent = ''; }, 4000);
     }
   });
 
