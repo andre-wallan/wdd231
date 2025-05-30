@@ -70,186 +70,62 @@
     </form>
 
     <!-- Members Display -->
-    <div class="members-display" id="membersDisplay">
-      <noscript>
-      <p style="margin:1.2rem 0;">Member listing is available without JavaScript.</p>
-      <div class="member-list">
-        <div class="member-card">
-        <img src="images/member1.jpg" alt="Member 1 Logo" class="member-logo">
-        <h3>Member 1 Business</h3>
-        <p>Category: Retail</p>
-        <p>Address: 123 Main St, Kabale</p>
-        </div>
-        <div class="member-card">
-        <img src="images/member2.jpg" alt="Member 2 Logo" class="member-logo">
-        <h3>Member 2 Services</h3>
-        <p>Category: Services</p>
-        <p>Address: 456 Hill Rd, Kabale</p>
-        </div>
-        <div class="member-card">
-        <img src="images/member3.jpg" alt="Member 3 Logo" class="member-logo">
-        <h3>Member 3 Solutions</h3>
-        <p>Category: Technology</p>
-        <p>Address: 789 Lake View, Kabale</p>
-        </div>
+    <div class="members-display" id="membersDisplay" aria-label="Chamber Members">
+      <div class="member-card">
+        <img src="images/bytefix.png" alt="ByteFix logo">
+        <h3>ByteFix</h3>
+        <p class="category">IT Services</p>
+        <p class="address">123 Tech Lane, Bwindi</p>
+        <p class="phone">+256 712 345678</p>
+        <a href="https://bytefix.ug" target="_blank" rel="noopener">Website</a>
+        <p class="info">Computer repair and IT consulting.</p>
       </div>
-      </noscript>
-      <!-- JavaScript will dynamically populate members here -->
-      <script>
-        // Members Data
-        const membersData = [
-          {
-        name: "ByteFix",
-        category: "IT Services",
-        address: "123 Tech Lane, Bwindi",
-        phone: "+256 712 345678",
-        website: "https://bytefix.ug",
-        membership: 3,
-        image: "bytefix.png",
-        info: "Computer repair and IT consulting."
-          },
-          {
-        name: "SolarBright",
-        category: "Energy",
-        address: "45 Solar Avenue, Bwindi",
-        phone: "+256 702 112233",
-        website: "https://solarbright.ug",
-        membership: 2,
-        image: "solarbright.png",
-        info: "Solar panel installation and maintenance."
-          },
-          {
-        name: "TechNova",
-        category: "Technology",
-        address: "Innovation Park, Kabale",
-        phone: "+256 776 998877",
-        website: "https://technova.ug",
-        membership: 1,
-        image: "technova.png",
-        info: "Tech solutions for modern businesses."
-          },
-          {
-        name: "UrbanFoods",
-        category: "Retail",
-        address: "Market Street, Bwindi",
-        phone: "+256 701 223344",
-        website: "https://urbanfoods.ug",
-        membership: 2,
-        image: "urbanfoods.png",
-        info: "Fresh groceries and organic produce."
-          },
-          {
-        name: "Green Harvest",
-        category: "Agriculture",
-        address: "Harvest Road, Bwindi",
-        phone: "+256 703 334455",
-        website: "https://greenharvest.ug",
-        membership: 3,
-        image: "greenharvest.png",
-        info: "Sustainable farming and produce supply."
-          },
-          {
-        name: "SafariWheels",
-        category: "Transport",
-        address: "Safari Drive, Kabale",
-        phone: "+256 704 445566",
-        website: "https://safariwheels.ug",
-        membership: 1,
-        image: "safariwheels.png",
-        info: "Tour and travel vehicle rentals."
-          }
-        ];
-
-        // Render members in grid view by default
-        function renderMembers(members, view = "grid") {
-          const container = document.getElementById("membersDisplay");
-          let html = "";
-          if (view === "grid") {
-        html += `<div class="member-list grid-view">`;
-        members.forEach(member => {
-          html += `
-            <div class="member-card">
-          <img src="images/${member.image}" alt="${member.name} Logo" class="member-logo">
-          <h3>${member.name}</h3>
-          <p><strong>Category:</strong> ${member.category}</p>
-          <p><strong>Address:</strong> ${member.address}</p>
-          <p><strong>Phone:</strong> <a href="tel:${member.phone.replace(/\s+/g, '')}">${member.phone}</a></p>
-          <p><strong>Website:</strong> <a href="${member.website}" target="_blank" rel="noopener">${member.website.replace(/^https?:\/\//, '')}</a></p>
-          <p>${member.info}</p>
-            </div>
-          `;
-        });
-        html += `</div>`;
-          } else {
-        html += `<ul class="member-list list-view">`;
-        members.forEach(member => {
-          html += `
-            <li class="member-list-item">
-          <img src="images/${member.image}" alt="${member.name} Logo" class="member-logo">
-          <div>
-            <h3>${member.name}</h3>
-            <p><strong>Category:</strong> ${member.category}</p>
-            <p><strong>Address:</strong> ${member.address}</p>
-            <p><strong>Phone:</strong> <a href="tel:${member.phone.replace(/\s+/g, '')}">${member.phone}</a></p>
-            <p><strong>Website:</strong> <a href="${member.website}" target="_blank" rel="noopener">${member.website.replace(/^https?:\/\//, '')}</a></p>
-            <p>${member.info}</p>
-          </div>
-            </li>
-          `;
-        });
-        html += `</ul>`;
-          }
-          // Only replace the dynamic part, not the <noscript>
-          container.querySelectorAll('.member-list, .member-list.list-view, .member-list.grid-view').forEach(e => e.remove());
-          container.insertAdjacentHTML('beforeend', html);
-        }
-
-        // Initial render
-        document.addEventListener("DOMContentLoaded", function() {
-          renderMembers(membersData, "grid");
-
-          // Toggle view buttons
-          const gridBtn = document.getElementById("gridBtn");
-          const listBtn = document.getElementById("listBtn");
-          gridBtn.addEventListener("click", () => {
-        gridBtn.classList.add("active");
-        gridBtn.setAttribute("aria-pressed", "true");
-        listBtn.classList.remove("active");
-        listBtn.setAttribute("aria-pressed", "false");
-        renderMembers(membersData, "grid");
-          });
-          listBtn.addEventListener("click", () => {
-        listBtn.classList.add("active");
-        listBtn.setAttribute("aria-pressed", "true");
-        gridBtn.classList.remove("active");
-        gridBtn.setAttribute("aria-pressed", "false");
-        renderMembers(membersData, "list");
-          });
-
-          // Search functionality
-          const searchForm = document.getElementById("searchForm");
-          const searchInput = document.getElementById("searchInput");
-          const clearBtn = document.getElementById("clearSearchBtn");
-          searchForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-        const query = searchInput.value.trim().toLowerCase();
-        if (!query) {
-          renderMembers(membersData, gridBtn.classList.contains("active") ? "grid" : "list");
-          return;
-        }
-        const filtered = membersData.filter(m =>
-          m.name.toLowerCase().includes(query) ||
-          m.category.toLowerCase().includes(query) ||
-          m.address.toLowerCase().includes(query)
-        );
-        renderMembers(filtered, gridBtn.classList.contains("active") ? "grid" : "list");
-          });
-          clearBtn.addEventListener("click", function() {
-        searchInput.value = "";
-        renderMembers(membersData, gridBtn.classList.contains("active") ? "grid" : "list");
-          });
-        });
-      </script>
+      <div class="member-card">
+        <img src="images/solarbright.png" alt="SolarBright logo">
+        <h3>SolarBright</h3>
+        <p class="category">Energy</p>
+        <p class="address">45 Solar Avenue, Bwindi</p>
+        <p class="phone">+256 702 112233</p>
+        <a href="https://solarbright.ug" target="_blank" rel="noopener">Website</a>
+        <p class="info">Solar panel installation and maintenance.</p>
+      </div>
+      <div class="member-card">
+        <img src="images/technova.png" alt="TechNova logo">
+        <h3>TechNova</h3>
+        <p class="category">Technology</p>
+        <p class="address">Innovation Park, Kabale</p>
+        <p class="phone">+256 776 998877</p>
+        <a href="https://technova.ug" target="_blank" rel="noopener">Website</a>
+        <p class="info">Tech solutions for modern businesses.</p>
+      </div>
+      <div class="member-card">
+        <img src="images/urbanfoods.png" alt="UrbanFoods logo">
+        <h3>UrbanFoods</h3>
+        <p class="category">Retail</p>
+        <p class="address">Market Street, Bwindi</p>
+        <p class="phone">+256 701 223344</p>
+        <a href="https://urbanfoods.ug" target="_blank" rel="noopener">Website</a>
+        <p class="info">Fresh groceries and organic produce.</p>
+      </div>
+      <div class="member-card">
+        <img src="images/greenharvest.png" alt="Green Harvest logo">
+        <h3>Green Harvest</h3>
+        <p class="category">Agriculture</p>
+        <p class="address">Harvest Road, Bwindi</p>
+        <p class="phone">+256 703 334455</p>
+        <a href="https://greenharvest.ug" target="_blank" rel="noopener">Website</a>
+        <p class="info">Sustainable farming and produce supply.</p>
+      </div>
+      <div class="member-card">
+        <img src="images/safariwheels.png" alt="SafariWheels logo">
+        <h3>SafariWheels</h3>
+        <p class="category">Transport</p>
+        <p class="address">Safari Drive, Kabale</p>
+        <p class="phone">+256 704 445566</p>
+        <a href="https://safariwheels.ug" target="_blank" rel="noopener">Website</a>
+        <p class="info">Tour and travel vehicle rentals.</p>
+      </div>
+    </div>
       <!-- JavaScript will dynamically populate members here -->
     </div>
 
