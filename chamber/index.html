@@ -71,10 +71,30 @@
 
     <!-- Members Display -->
     <div class="members-display" id="membersDisplay">
-      <script>
-        document.getElementById('membersDisplay').innerHTML = 
-          <p style="margin:1.2rem 0;">Member listing is available without JavaScript.</p>
-      </script>
+      <noscript>
+      <p style="margin:1.2rem 0;">Member listing is available without JavaScript.</p>
+      <div class="member-list">
+        <div class="member-card">
+        <img src="images/member1.jpg" alt="Member 1 Logo" class="member-logo">
+        <h3>Member 1 Business</h3>
+        <p>Category: Retail</p>
+        <p>Address: 123 Main St, Kabale</p>
+        </div>
+        <div class="member-card">
+        <img src="images/member2.jpg" alt="Member 2 Logo" class="member-logo">
+        <h3>Member 2 Services</h3>
+        <p>Category: Services</p>
+        <p>Address: 456 Hill Rd, Kabale</p>
+        </div>
+        <div class="member-card">
+        <img src="images/member3.jpg" alt="Member 3 Logo" class="member-logo">
+        <h3>Member 3 Solutions</h3>
+        <p>Category: Technology</p>
+        <p>Address: 789 Lake View, Kabale</p>
+        </div>
+      </div>
+      </noscript>
+      <!-- JavaScript will dynamically populate members here -->
     </div>
 
     <div class="main-sections">
