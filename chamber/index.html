@@ -28,6 +28,7 @@
       </nav>
     </div>
   </header>
+
   <main class="container">
     <!-- Hero Section -->
     <section class="hero" aria-label="Welcome">
@@ -38,7 +39,7 @@
       </div>
     </section>
 
-    <!-- Mission, Vision, Values -->
+    <!-- About Chamber -->
     <section class="about-chamber" aria-label="About Chamber">
       <h2>Our Mission</h2>
       <p>To promote and support local businesses, advocate for economic growth, and enhance the prosperity of the Kabale community.</p>
@@ -54,104 +55,40 @@
       </ul>
     </section>
 
-    <!-- Toggle Display Buttons -->
-    <div class="toggle-display-btns" aria-label="Toggle member display">
-      <button id="gridBtn" class="active" type="button" aria-pressed="true">Grid View</button>
-      <button id="listBtn" type="button" aria-pressed="false">List View</button>
-    </div>
+    <!-- Display Toggle & Search -->
+    <section class="member-controls" aria-label="Control Member View">
+      <div class="toggle-display-btns">
+        <button id="gridBtn" class="active" aria-pressed="true">Grid View</button>
+        <button id="listBtn" aria-pressed="false">List View</button>
+      </div>
 
-    <!-- Search Members -->
-    <form class="search-form" id="searchForm" autocomplete="off" aria-label="Search Chamber Members" action="#">
-      <label for="searchInput">Search Chamber Members:</label>
-      <input type="text" id="searchInput" placeholder="Enter name, category, or address...">
-      <button type="submit">Search</button>
-      <button type="button" id="clearSearchBtn">Clear</button>
-      <div class="search-results" id="searchResults"></div>
-    </form>
+      <form class="search-form" id="searchForm" autocomplete="off" aria-label="Search Chamber Members">
+        <label for="searchInput">Search Chamber Members:</label>
+        <input type="text" id="searchInput" placeholder="Enter name, category, or address...">
+        <button type="submit">Search</button>
+        <button type="button" id="clearSearchBtn">Clear</button>
+        <div class="search-results" id="searchResults"></div>
+      </form>
+    </section>
 
     <!-- Members Display -->
-    <div class="members-display" id="membersDisplay" aria-label="Chamber Members">
-      <div class="member-card">
-        <img src="images/bytefix.png">
-        <h3>ByteFix</h3>
-        <p class="category">IT Services</p>
-        <p class="address">123 Tech Lane, Bwindi</p>
-        <p class="phone">+256 712 345678</p>
-        <a href="https://bytefix.ug" target="_blank" rel="noopener">Website</a>
-        <p class="info">Computer repair and IT consulting.</p>
-      </div>
-      <div class="member-card">
-        <img src="images/solarbright.png">
-        <h3>SolarBright</h3>
-        <p class="category">Energy</p>
-        <p class="address">45 Solar Avenue, Bwindi</p>
-        <p class="phone">+256 702 112233</p>
-        <a href="https://solarbright.ug" target="_blank" rel="noopener">Website</a>
-        <p class="info">Solar panel installation and maintenance.</p>
-      </div>
-      <div class="member-card">
-        <img src="images/technova.png">
-        <h3>TechNova</h3>
-        <p class="category">Technology</p>
-        <p class="address">Innovation Park, Kabale</p>
-        <p class="phone">+256 776 998877</p>
-        <a href="https://technova.ug" target="_blank" rel="noopener">Website</a>
-        <p class="info">Tech solutions for modern businesses.</p>
-      </div>
-      <div class="member-card">
-        <img src="images/urbanfoods.png">
-        <h3>UrbanFoods</h3>
-        <p class="category">Retail</p>
-        <p class="address">Market Street, Bwindi</p>
-        <p class="phone">+256 701 223344</p>
-        <a href="https://urbanfoods.ug" target="_blank" rel="noopener">Website</a>
-        <p class="info">Fresh groceries and organic produce.</p>
-      </div>
-      <div class="member-card">
-        <img src="images/greenharvest.png">
-        <h3>Green Harvest</h3>
-        <p class="category">Agriculture</p>
-        <p class="address">Harvest Road, Bwindi</p>
-        <p class="phone">+256 703 334455</p>
-        <a href="https://greenharvest.ug" target="_blank" rel="noopener">Website</a>
-        <p class="info">Sustainable farming and produce supply.</p>
-      </div>
-      <div class="member-card">
-        <img src="images/safariwheels.png">
-        <h3>SafariWheels</h3>
-        <p class="category">Transport</p>
-        <p class="address">Safari Drive, Kabale</p>
-        <p class="phone">+256 704 445566</p>
-        <a href="https://safariwheels.ug" target="_blank" rel="noopener">Website</a>
-        <p class="info">Tour and travel vehicle rentals.</p>
-      </div>
-    </div>
-      <!-- JavaScript will dynamically populate members here -->
-    </div>
+    <section class="members-display" id="membersDisplay" aria-label="Chamber Members">
+      <!-- JavaScript dynamically populates member cards here -->
+    </section>
 
+    <!-- Main Content Sections -->
     <div class="main-sections">
-      <!-- Events Section -->
+      <!-- Events -->
       <section aria-labelledby="events-title">
         <h2 id="events-title">Upcoming Events</h2>
         <ul>
-          <li>
-            <strong>Business Networking Breakfast</strong><br>
-            <span>June 15, 2025 &mdash; 8:00 AM</span><br>
-            <span>Kabale Resort Hotel</span>
-          </li>
-          <li>
-            <strong>Annual General Meeting</strong><br>
-            <span>July 10, 2025 &mdash; 10:00 AM</span><br>
-            <span>Chamber Conference Hall</span>
-          </li>
-          <li>
-            <strong>Entrepreneurship Workshop</strong><br>
-            <span>August 5, 2025 &mdash; 2:00 PM</span><br>
-            <span>Online (Zoom)</span>
-          </li>
+          <li><strong>Business Networking Breakfast</strong><br>June 15, 2025 &mdash; 8:00 AM<br>Kabale Resort Hotel</li>
+          <li><strong>Annual General Meeting</strong><br>July 10, 2025 &mdash; 10:00 AM<br>Chamber Conference Hall</li>
+          <li><strong>Entrepreneurship Workshop</strong><br>August 5, 2025 &mdash; 2:00 PM<br>Online (Zoom)</li>
         </ul>
       </section>
-      <!-- Weather Section -->
+
+      <!-- Weather -->
       <section aria-labelledby="weather-title">
         <h2 id="weather-title">Kabale Weather</h2>
         <div id="weather">
@@ -163,24 +100,20 @@
             </div>
           </div>
           <div class="forecast" id="forecast">
-            <noscript>
-              <div>Weather information is unavailable without JavaScript.</div>
-            </noscript>
+            <noscript><div>Weather information is unavailable without JavaScript.</div></noscript>
           </div>
         </div>
-        <button type="button" class="refresh-spotlights-btn" id="refreshWeatherBtn">Refresh Weather</button>
+        <button id="refreshWeatherBtn">Refresh Weather</button>
       </section>
     </div>
 
-    <!-- Spotlights Section -->
+    <!-- Spotlights -->
     <section aria-labelledby="spotlights-title">
       <h2 id="spotlights-title">Member Spotlights</h2>
       <div class="spotlights" id="spotlights">
-      <noscript>
-        <p>Spotlights are unavailable without JavaScript.</p>
-      </noscript>
+        <noscript><p>Spotlights are unavailable without JavaScript.</p></noscript>
       </div>
-      <button type="button" class="refresh-spotlights-btn" id="refreshSpotlightsBtn">Show Other Spotlights</button>
+      <button id="refreshSpotlightsBtn">Show Other Spotlights</button>
     </section>
 
     <!-- Join Section -->
@@ -203,12 +136,15 @@
     </section>
 
     <!-- Feedback Form -->
-    <form class="feedback-form" id="feedbackForm" autocomplete="off" aria-label="Send Feedback" action="#">
-      <label for="feedbackInput">We value your feedback! Let us know your thoughts:</label>
-      <textarea id="feedbackInput" required placeholder="Type your feedback here..."></textarea>
-      <button type="submit">Send Feedback</button>
-      <div id="feedbackMsg" style="margin-top:0.7rem;"></div>
-    </form>
+    <section aria-labelledby="feedback-form-title">
+      <h2 id="feedback-form-title">Feedback</h2>
+      <form class="feedback-form" id="feedbackForm" autocomplete="off" aria-label="Send Feedback">
+        <label for="feedbackInput">We value your feedback! Let us know your thoughts:</label>
+        <textarea id="feedbackInput" required placeholder="Type your feedback here..."></textarea>
+        <button type="submit">Send Feedback</button>
+        <div id="feedbackMsg" style="margin-top:0.7rem;"></div>
+      </form>
+    </section>
   </main>
 
   <footer>
@@ -221,18 +157,20 @@
         <a href="privacy.html">Privacy Policy</a> | 
         <a href="terms.html">Terms of Service</a>
       </p>
-      <p>
-        <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><img src="images/facebook.svg" alt="Facebook" style="height:1.2em;"></a>
-        <a href="https://www.twitter.com/" target="_blank" rel="noopener" aria-label="Twitter"><img src="images/twitter.svg" alt="Twitter" style="height:1.2em;"></a>
-        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><img src="images/linkedin.svg" alt="LinkedIn" style="height:1.2em;"></a>
+      <p class="socials">
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
+          <img src="images/facebook.svg" alt="Facebook" style="height:1.2em;">
+        </a>
+        <a href="https://www.twitter.com/" target="_blank" rel="noopener" aria-label="Twitter">
+          <img src="images/twitter.svg" alt="Twitter" style="height:1.2em;">
+        </a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <img src="images/linkedin.svg" alt="LinkedIn" style="height:1.2em;">
+        </a>
       </p>
     </div>
   </footer>
 
   <script src="scripts.js"></script>
-  <!-- Optional image example -->
-  <div style="display:none;">
-    <img src="images/hero.jpg" alt="Description of image">
-  </div>
 </body>
 </html>
