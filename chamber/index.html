@@ -71,9 +71,10 @@
 
     <!-- Members Display -->
     <div class="members-display" id="membersDisplay">
-      <noscript>
-        <p style="margin:1.2rem 0;">Member listing is unavailable without JavaScript.</p>
-      </noscript>
+      <script>
+        document.getElementById('membersDisplay').innerHTML = `
+          <p style="margin:1.2rem 0;">Member listing is available without JavaScript.</p>
+      </script>
     </div>
 
     <div class="main-sections">
