@@ -95,6 +95,162 @@
       </div>
       </noscript>
       <!-- JavaScript will dynamically populate members here -->
+      <script>
+        // Members Data
+        const membersData = [
+          {
+        name: "ByteFix",
+        category: "IT Services",
+        address: "123 Tech Lane, Bwindi",
+        phone: "+256 712 345678",
+        website: "https://bytefix.ug",
+        membership: 3,
+        image: "bytefix.png",
+        info: "Computer repair and IT consulting."
+          },
+          {
+        name: "SolarBright",
+        category: "Energy",
+        address: "45 Solar Avenue, Bwindi",
+        phone: "+256 702 112233",
+        website: "https://solarbright.ug",
+        membership: 2,
+        image: "solarbright.png",
+        info: "Solar panel installation and maintenance."
+          },
+          {
+        name: "TechNova",
+        category: "Technology",
+        address: "Innovation Park, Kabale",
+        phone: "+256 776 998877",
+        website: "https://technova.ug",
+        membership: 1,
+        image: "technova.png",
+        info: "Tech solutions for modern businesses."
+          },
+          {
+        name: "UrbanFoods",
+        category: "Retail",
+        address: "Market Street, Bwindi",
+        phone: "+256 701 223344",
+        website: "https://urbanfoods.ug",
+        membership: 2,
+        image: "urbanfoods.png",
+        info: "Fresh groceries and organic produce."
+          },
+          {
+        name: "Green Harvest",
+        category: "Agriculture",
+        address: "Harvest Road, Bwindi",
+        phone: "+256 703 334455",
+        website: "https://greenharvest.ug",
+        membership: 3,
+        image: "greenharvest.png",
+        info: "Sustainable farming and produce supply."
+          },
+          {
+        name: "SafariWheels",
+        category: "Transport",
+        address: "Safari Drive, Kabale",
+        phone: "+256 704 445566",
+        website: "https://safariwheels.ug",
+        membership: 1,
+        image: "safariwheels.png",
+        info: "Tour and travel vehicle rentals."
+          }
+        ];
+
+        // Render members in grid view by default
+        function renderMembers(members, view = "grid") {
+          const container = document.getElementById("membersDisplay");
+          let html = "";
+          if (view === "grid") {
+        html += `<div class="member-list grid-view">`;
+        members.forEach(member => {
+          html += `
+            <div class="member-card">
+          <img src="images/${member.image}" alt="${member.name} Logo" class="member-logo">
+          <h3>${member.name}</h3>
+          <p><strong>Category:</strong> ${member.category}</p>
+          <p><strong>Address:</strong> ${member.address}</p>
+          <p><strong>Phone:</strong> <a href="tel:${member.phone.replace(/\s+/g, '')}">${member.phone}</a></p>
+          <p><strong>Website:</strong> <a href="${member.website}" target="_blank" rel="noopener">${member.website.replace(/^https?:\/\//, '')}</a></p>
+          <p>${member.info}</p>
+            </div>
+          `;
+        });
+        html += `</div>`;
+          } else {
+        html += `<ul class="member-list list-view">`;
+        members.forEach(member => {
+          html += `
+            <li class="member-list-item">
+          <img src="images/${member.image}" alt="${member.name} Logo" class="member-logo">
+          <div>
+            <h3>${member.name}</h3>
+            <p><strong>Category:</strong> ${member.category}</p>
+            <p><strong>Address:</strong> ${member.address}</p>
+            <p><strong>Phone:</strong> <a href="tel:${member.phone.replace(/\s+/g, '')}">${member.phone}</a></p>
+            <p><strong>Website:</strong> <a href="${member.website}" target="_blank" rel="noopener">${member.website.replace(/^https?:\/\//, '')}</a></p>
+            <p>${member.info}</p>
+          </div>
+            </li>
+          `;
+        });
+        html += `</ul>`;
+          }
+          // Only replace the dynamic part, not the <noscript>
+          container.querySelectorAll('.member-list, .member-list.list-view, .member-list.grid-view').forEach(e => e.remove());
+          container.insertAdjacentHTML('beforeend', html);
+        }
+
+        // Initial render
+        document.addEventListener("DOMContentLoaded", function() {
+          renderMembers(membersData, "grid");
+
+          // Toggle view buttons
+          const gridBtn = document.getElementById("gridBtn");
+          const listBtn = document.getElementById("listBtn");
+          gridBtn.addEventListener("click", () => {
+        gridBtn.classList.add("active");
+        gridBtn.setAttribute("aria-pressed", "true");
+        listBtn.classList.remove("active");
+        listBtn.setAttribute("aria-pressed", "false");
+        renderMembers(membersData, "grid");
+          });
+          listBtn.addEventListener("click", () => {
+        listBtn.classList.add("active");
+        listBtn.setAttribute("aria-pressed", "true");
+        gridBtn.classList.remove("active");
+        gridBtn.setAttribute("aria-pressed", "false");
+        renderMembers(membersData, "list");
+          });
+
+          // Search functionality
+          const searchForm = document.getElementById("searchForm");
+          const searchInput = document.getElementById("searchInput");
+          const clearBtn = document.getElementById("clearSearchBtn");
+          searchForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const query = searchInput.value.trim().toLowerCase();
+        if (!query) {
+          renderMembers(membersData, gridBtn.classList.contains("active") ? "grid" : "list");
+          return;
+        }
+        const filtered = membersData.filter(m =>
+          m.name.toLowerCase().includes(query) ||
+          m.category.toLowerCase().includes(query) ||
+          m.address.toLowerCase().includes(query)
+        );
+        renderMembers(filtered, gridBtn.classList.contains("active") ? "grid" : "list");
+          });
+          clearBtn.addEventListener("click", function() {
+        searchInput.value = "";
+        renderMembers(membersData, gridBtn.classList.contains("active") ? "grid" : "list");
+          });
+        });
+      </script>
+      <!-- JavaScript will dynamically populate members here -->
     </div>
 
     <div class="main-sections">
