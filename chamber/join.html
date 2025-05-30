@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Apply to join the Chamber of Commerce and discover membership benefits, networking opportunities, and exclusive resources for your organization." />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join the Chamber</title>
-    <!-- Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="styles.css" />
     <style>
@@ -37,25 +35,56 @@
             background: #f8f8f8;
             padding: 1em;
             border-radius: 8px;
-            transition: all 1s ease-in-out;
+            transition: all 0.6s cubic-bezier(.4,0,.2,1);
             opacity: 0;
             transform: translateY(20px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
         .membership-card.visible {
             opacity: 1;
             transform: translateY(0);
         }
+        form {
+            max-width: 500px;
+            margin: 2em auto;
+            background: #fff;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
         form label {
             display: block;
             margin-bottom: 1em;
+        }
+        form input, form select, form textarea {
+            width: 100%;
+            padding: 0.5em;
+            margin-top: 0.3em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        form input[type="submit"] {
+            width: auto;
+            background: #0077cc;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 0.7em 1.5em;
+            border-radius: 4px;
+            margin-top: 1em;
+            transition: background 0.2s;
+        }
+        form input[type="submit"]:hover {
+            background: #005fa3;
         }
         .modal {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             background-color: rgba(0, 0, 0, 0.5);
             justify-content: center;
             align-items: center;
@@ -63,10 +92,11 @@
         }
         .modal-content {
             background-color: white;
-            padding: 1em;
-            max-width: 500px;
+            padding: 1.5em;
+            max-width: 400px;
             border-radius: 8px;
             position: relative;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
         }
         .close-modal {
             position: absolute;
@@ -74,33 +104,52 @@
             right: 0.5em;
             background: none;
             border: none;
-            font-size: 1.2em;
+            font-size: 1.5em;
             cursor: pointer;
+            color: #888;
+        }
+        .close-modal:hover {
+            color: #333;
+        }
+        main {
+            padding: 1em;
+        }
+        footer {
+            text-align: center;
+            padding: 1em 0;
+            background: #f0f0f0;
+            margin-top: 2em;
         }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            // Animate membership cards
             document.querySelectorAll(".membership-card").forEach((card, index) => {
                 setTimeout(() => {
                     card.classList.add("visible");
-                }, index * 200);
+                }, index * 150);
             });
 
+            // Modal open
             document.querySelectorAll(".modal-link").forEach(link => {
                 link.addEventListener("click", event => {
                     event.preventDefault();
                     const modalId = link.getAttribute("data-modal");
-                    document.getElementById(modalId).style.display = "flex";
+                    const modal = document.getElementById(modalId);
+                    if (modal) {
+                        modal.style.display = "flex";
+                        modal.querySelector(".modal-content").focus();
+                    }
                 });
             });
 
+            // Modal close
             document.querySelectorAll(".modal").forEach(modal => {
                 modal.addEventListener("click", e => {
                     if (e.target === modal) {
                         modal.style.display = "none";
                     }
                 });
-                // Add close button handler
                 const closeBtn = modal.querySelector(".close-modal");
                 if (closeBtn) {
                     closeBtn.addEventListener("click", () => {
@@ -109,23 +158,25 @@
                 }
             });
 
-            document.getElementById("timestamp").value = new Date().toISOString();
+            // Set timestamp
+            const ts = document.getElementById("timestamp");
+            if (ts) ts.value = new Date().toISOString();
         });
     </script>
 </head>
 <body>
     <header>
         <h1>Chamber of Commerce</h1>
-        <nav>
+        <nav aria-label="Main navigation">
             <a href="./index.html">Home</a>
             <a href="./about.html">About</a>
-            <a href="./join.html">Join</a>
+            <a href="./join.html" aria-current="page">Join</a>
         </nav>
     </header>
 
     <main>
         <h2>Join the Chamber</h2>
-        <form method="get" action="./thankyou.html">
+        <form method="get" action="./thankyou.html" autocomplete="on">
             <label>
                 First Name:
                 <input type="text" name="firstname" title="First Name" required autocomplete="given-name" />
@@ -144,7 +195,7 @@
             </label>
             <label>
                 Mobile Phone:
-                <input type="tel" name="phone" title="Mobile Phone" required autocomplete="tel" />
+                <input type="tel" name="phone" title="Mobile Phone" required autocomplete="tel" pattern="[\d\s\-\(\)]{7,}" />
             </label>
             <label>
                 Organization Name:
@@ -152,7 +203,8 @@
             </label>
             <label>
                 Membership Level:
-                <select name="membership" title="Membership Level">
+                <select name="membership" title="Membership Level" required>
+                    <option value="" disabled selected>Select a level</option>
                     <option value="np">NP Membership (Non-Profit)</option>
                     <option value="bronze">Bronze Membership</option>
                     <option value="silver">Silver Membership</option>
@@ -161,13 +213,13 @@
             </label>
             <label>
                 Business Description:
-                <textarea name="description" title="Business Description"></textarea>
+                <textarea name="description" title="Business Description" rows="3"></textarea>
             </label>
             <input type="hidden" name="timestamp" id="timestamp" />
             <input type="submit" value="Submit Application" />
         </form>
 
-        <section class="membership-cards">
+        <section class="membership-cards" aria-label="Membership Levels">
             <div class="membership-card">
                 <h3>NP Membership</h3>
                 <a href="#" class="modal-link" data-modal="modal-np">More Info</a>
@@ -187,29 +239,29 @@
         </section>
 
         <!-- Modals -->
-        <div class="modal" id="modal-np">
-            <div class="modal-content">
+        <div class="modal" id="modal-np" tabindex="-1" aria-modal="true" role="dialog">
+            <div class="modal-content" tabindex="0">
                 <button class="close-modal" aria-label="Close">&times;</button>
                 <h4>NP Membership Benefits</h4>
                 <p>No fee. Access to community events and basic training workshops.</p>
             </div>
         </div>
-        <div class="modal" id="modal-bronze">
-            <div class="modal-content">
+        <div class="modal" id="modal-bronze" tabindex="-1" aria-modal="true" role="dialog">
+            <div class="modal-content" tabindex="0">
                 <button class="close-modal" aria-label="Close">&times;</button>
                 <h4>Bronze Membership Benefits</h4>
                 <p>Includes training, local networking events, and advertising listings.</p>
             </div>
         </div>
-        <div class="modal" id="modal-silver">
-            <div class="modal-content">
+        <div class="modal" id="modal-silver" tabindex="-1" aria-modal="true" role="dialog">
+            <div class="modal-content" tabindex="0">
                 <button class="close-modal" aria-label="Close">&times;</button>
                 <h4>Silver Membership Benefits</h4>
                 <p>All bronze benefits plus homepage spotlight and discounted event fees.</p>
             </div>
         </div>
-        <div class="modal" id="modal-gold">
-            <div class="modal-content">
+        <div class="modal" id="modal-gold" tabindex="-1" aria-modal="true" role="dialog">
+            <div class="modal-content" tabindex="0">
                 <button class="close-modal" aria-label="Close">&times;</button>
                 <h4>Gold Membership Benefits</h4>
                 <p>All silver benefits plus featured spotlight, exclusive training, and premier events access.</p>

@@ -12,11 +12,11 @@
 <body>
   <header>
     <div class="container nav-wrapper">
-      <div class="hero-image-wrapper">
-        <img src="images/hero.jpg" alt="Kabale cityscape and hills" class="hero-image">
+      <a href="index.html" class="hero-image-wrapper" aria-label="Kabale Chamber of Commerce Home">
+        <img src="images/hero.jpg" alt="Kabale cityscape and hills" class="hero-image" loading="lazy">
         <h1>Kabale Chamber of Commerce</h1>
-      </div>
-      <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="mainNav" aria-expanded="false">&#9776;</button>
       <nav>
         <ul id="mainNav">
           <li><a href="index.html" class="active" aria-current="page">Home</a></li>
@@ -57,17 +57,17 @@
 
     <!-- Display Toggle & Search -->
     <section class="member-controls" aria-label="Control Member View">
-      <div class="toggle-display-btns">
-        <button id="gridBtn" class="active" aria-pressed="true">Grid View</button>
-        <button id="listBtn" aria-pressed="false">List View</button>
+      <div class="toggle-display-btns" role="group" aria-label="Toggle member display">
+        <button id="gridBtn" class="active" aria-pressed="true" type="button">Grid View</button>
+        <button id="listBtn" aria-pressed="false" type="button">List View</button>
       </div>
 
       <form class="search-form" id="searchForm" autocomplete="off" aria-label="Search Chamber Members">
         <label for="searchInput">Search Chamber Members:</label>
-        <input type="text" id="searchInput" placeholder="Enter name, category, or address...">
+        <input type="search" id="searchInput" placeholder="Enter name, category, or address..." aria-label="Search Chamber Members">
         <button type="submit">Search</button>
         <button type="button" id="clearSearchBtn">Clear</button>
-        <div class="search-results" id="searchResults"></div>
+        <div class="search-results" id="searchResults" aria-live="polite"></div>
       </form>
     </section>
 
@@ -82,9 +82,21 @@
       <section aria-labelledby="events-title">
         <h2 id="events-title">Upcoming Events</h2>
         <ul>
-          <li><strong>Business Networking Breakfast</strong><br>June 15, 2025 &mdash; 8:00 AM<br>Kabale Resort Hotel</li>
-          <li><strong>Annual General Meeting</strong><br>July 10, 2025 &mdash; 10:00 AM<br>Chamber Conference Hall</li>
-          <li><strong>Entrepreneurship Workshop</strong><br>August 5, 2025 &mdash; 2:00 PM<br>Online (Zoom)</li>
+          <li>
+            <strong>Business Networking Breakfast</strong><br>
+            <time datetime="2025-06-15T08:00">June 15, 2025 &mdash; 8:00 AM</time><br>
+            Kabale Resort Hotel
+          </li>
+          <li>
+            <strong>Annual General Meeting</strong><br>
+            <time datetime="2025-07-10T10:00">July 10, 2025 &mdash; 10:00 AM</time><br>
+            Chamber Conference Hall
+          </li>
+          <li>
+            <strong>Entrepreneurship Workshop</strong><br>
+            <time datetime="2025-08-05T14:00">August 5, 2025 &mdash; 2:00 PM</time><br>
+            Online (Zoom)
+          </li>
         </ul>
       </section>
 
@@ -93,7 +105,7 @@
         <h2 id="weather-title">Kabale Weather</h2>
         <div id="weather">
           <div class="weather-today">
-            <img id="weather-icon" src="" alt="Weather icon" style="display:none">
+            <img id="weather-icon" src="" alt="Weather icon" style="display:none" loading="lazy">
             <div>
               <span id="weather-temp">--°C</span>
               <span id="weather-desc"></span>
@@ -103,7 +115,7 @@
             <noscript><div>Weather information is unavailable without JavaScript.</div></noscript>
           </div>
         </div>
-        <button id="refreshWeatherBtn">Refresh Weather</button>
+        <button id="refreshWeatherBtn" type="button">Refresh Weather</button>
       </section>
     </div>
 
@@ -113,7 +125,7 @@
       <div class="spotlights" id="spotlights">
         <noscript><p>Spotlights are unavailable without JavaScript.</p></noscript>
       </div>
-      <button id="refreshSpotlightsBtn">Show Other Spotlights</button>
+      <button id="refreshSpotlightsBtn" type="button">Show Other Spotlights</button>
     </section>
 
     <!-- Join Section -->
@@ -140,9 +152,9 @@
       <h2 id="feedback-form-title">Feedback</h2>
       <form class="feedback-form" id="feedbackForm" autocomplete="off" aria-label="Send Feedback">
         <label for="feedbackInput">We value your feedback! Let us know your thoughts:</label>
-        <textarea id="feedbackInput" required placeholder="Type your feedback here..."></textarea>
+        <textarea id="feedbackInput" required placeholder="Type your feedback here..." rows="4"></textarea>
         <button type="submit">Send Feedback</button>
-        <div id="feedbackMsg" style="margin-top:0.7rem;"></div>
+        <div id="feedbackMsg" style="margin-top:0.7rem;" aria-live="polite"></div>
       </form>
     </section>
   </main>
@@ -159,18 +171,18 @@
       </p>
       <p class="socials">
         <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
-          <img src="images/facebook.svg" alt="Facebook" style="height:1.2em;">
+          <img src="images/facebook.svg" alt="Facebook" style="height:1.2em;" loading="lazy">
         </a>
         <a href="https://www.twitter.com/" target="_blank" rel="noopener" aria-label="Twitter">
-          <img src="images/twitter.svg" alt="Twitter" style="height:1.2em;">
+          <img src="images/twitter.svg" alt="Twitter" style="height:1.2em;" loading="lazy">
         </a>
         <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <img src="images/linkedin.svg" alt="LinkedIn" style="height:1.2em;">
+          <img src="images/linkedin.svg" alt="LinkedIn" style="height:1.2em;" loading="lazy">
         </a>
       </p>
     </div>
   </footer>
 
-  <script src="scripts.js"></script>
+  <script src="scripts.js" defer></script>
 </body>
 </html>

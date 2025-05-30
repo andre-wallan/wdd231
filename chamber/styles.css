@@ -48,7 +48,7 @@ header h1 {
   font-size: 2rem;
   margin: 0;
   letter-spacing: 1px;
-  font-family: 'Merriweather', 'Segoe UI', Arial, sans-serif;
+  font-family: inherit;
 }
 nav ul {
   list-style: none;
@@ -118,7 +118,7 @@ nav a:focus {
   margin-top: 0;
   font-size: 2.2rem;
   color: #1a3a4a;
-  font-family: 'Merriweather', 'Segoe UI', Arial, sans-serif;
+  font-family: inherit;
 }
 .cta-btn {
   display: inline-block;
@@ -538,6 +538,29 @@ main {
   }
 }
 
-/* CSS validated: https://jigsaw.w3.org/css-validator/ */
+/* Accessibility improvements */
+:focus-visible {
+  outline: 2px solid #ffe082;
+  outline-offset: 2px;
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #ffe082;
+  outline-offset: 2px;
+}
 
-/* Note: Removed invalid property 'column-break-inside'. Use 'break-inside' if you need to control column breaks. */
+/* Utility classes */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+/* CSS validated: https://jigsaw.w3.org/css-validator/ */
