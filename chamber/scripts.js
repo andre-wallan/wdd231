@@ -30,9 +30,77 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ==== Members Data ====
   const membersData = [
-    // ... (same as before)
-    // [membersData array omitted for brevity]
-  ];
+  {
+    name: "ByteFix Solutions",
+    image: "bytefix.jpg",
+    category: "IT Services",
+    address: "123 Tech Lane, Kigali",
+    phone: "+250 788 123 456",
+    website: "https://bytefix.rw",
+    membership: 3,
+    info: "Expert computer repair and IT consulting."
+  },
+  {
+    name: "EduSmart Academy",
+    image: "edusmart.jpg",
+    category: "Education",
+    address: "45 Learning Ave, Kigali",
+    phone: "+250 788 234 567",
+    website: "https://edusmart.rw",
+    membership: 2,
+    info: "Innovative e-learning solutions for all ages."
+  },
+  {
+    name: "GreenHarvest Farms",
+    image: "greenharvest.jpg",
+    category: "Agriculture",
+    address: "78 Farm Road, Musanze",
+    phone: "+250 788 345 678",
+    website: "https://greenharvest.rw",
+    membership: 1,
+    info: "Organic produce and sustainable farming."
+  },
+  {
+    name: "SafariWheels Tours",
+    image: "safariwheels.jpg",
+    category: "Tourism",
+    address: "12 Safari St, Rubavu",
+    phone: "+250 788 456 789",
+    website: "https://safariwheels.rw",
+    membership: 2,
+    info: "Adventure tours and travel packages."
+  },
+  {
+    name: "SolarBright Energy",
+    image: "solarbright.jpg",
+    category: "Energy",
+    address: "99 Solar Park, Huye",
+    phone: "+250 788 567 890",
+    website: "https://solarbright.rw",
+    membership: 3,
+    info: "Affordable solar solutions for homes and businesses."
+  },
+  {
+    name: "TechNova Labs",
+    image: "technova.jpg",
+    category: "Research & Development",
+    address: "5 Innovation Dr, Kigali",
+    phone: "+250 788 678 901",
+    website: "https://technova.rw",
+    membership: 1,
+    info: "Cutting-edge technology research."
+  },
+  {
+    name: "UrbanFoods Market",
+    image: "urbanfoods.jpg",
+    category: "Retail",
+    address: "34 City Mall, Kigali",
+    phone: "+250 788 789 012",
+    website: "https://urbanfoods.rw",
+    membership: 2,
+    info: "Fresh groceries and gourmet foods."
+  }
+];
 
   let currentDisplay = 'grid';
   let lastSearchResults = membersData;
