@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     info: "Fresh groceries and gourmet foods."
   }
 ];
-
+  
   let currentDisplay = 'grid';
   let lastSearchResults = membersData;
 
