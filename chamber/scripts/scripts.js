@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
   refreshSpotlightsBtn?.addEventListener('click', renderSpotlights);
 
   // ==== Weather Integration ====
-  const apiKey = "API_KEY";
+  const apiKey = '6e423f759a655f148ba2121955d68c13';
   const lat = -1.2483;
   const lon = 29.9897;
 
