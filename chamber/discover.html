@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="facebook:card" content="summary_large_image">
+    <meta name="description" content="Kabale Chamber of Commerce - Connecting Local Businesses">
+    <meta name="author" content="Ssemanda Andrew Allan">
+    <meta property="og:title" content="Kabale Chamber of Commerce">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://andre_wallan.github.io/wdd231/chamber/images/logo.png">
+    <meta property="og:url" content="https://andre_wallan.github.io/wdd231/chamber/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,400;0,700;1,500&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/discover.css">
+    <script src="scripts/discover.js" defer></script>
+    <title>Kabale Chamber of Commerce</title>
+</head>
+<body>
+  <header class="header">
+      <div class="logo">
+          <img src="images/logo.png" alt="Kabale Business Chamber Logo">
+      </div>
+      <nav>
+          <button id="hamburger">☰</button>
+          <div id="navMenu" class="nav-menu">
+              <a href="index.html" aria-label="Navigate to Home">Home</a>
+              <a href="directory.html" aria-label="Navigate to Directory">Directory</a>
+              <a href="#" aria-label="Navigate to About Us">About</a>
+              <a href="#" aria-label="Navigate to Contact Us">Discover</a>
+              <a href="join.html" aria-label="Navigate to Contact Us">Join</a>
+          </div>
+      </nav>
+  </header>
+  
+  <main>
+    <h1>Kampala City Business Chamber</h1> <!-- This must be the first element in <main> -->
+
+    <section class="visitor-message">
+        <p id="visitMessage">Loading...</p>
+    </section>
+
+    <section class="grid-container" id="tourismGrid">
+        <!-- JavaScript will populate this section -->
+    </section>
+</main>
+  <footer class="footer">
+    <div class="footer-info">
+      <p>Email us at: <a href="mailto:info@kabaleconnect.ug">info@kabaleconnect.ug</a></p>
+      <p>Plot 15, Kampala Road, Kampala, Uganda</p>
+      <p>Phone: +256 700 123 456</p>
+      <p>Fax: +256 414 567 890</p>
+  </div>  
+      <div class="social-media">
+          <a href="#"><img src="images/twitter.webp" alt="Twitter"></a>
+          <a href="#"><img src="images/instagram.webp" alt="Instagram"></a>
+          <a href="#"><img src="images/facebook.webp" alt="Facebook"></a>
+      </div>
+      <div class="footer-info">
+        <p><span class="currentyear"></span> WDD 231 Class Project</p>
+        <p>*** Ssemanda Andrew Allan *** Uganda</p>
+        <p>&copy; <span class="currentyear"></span> Kabale Chamber of Commerce</p>
+        <p><span class="currentyear"></span> | Last Updated: <span id="lastModified"></span></p>
+    </div>
+    
+  </footer>
+  <script src="scripts/weather.js" defer></script>
+  <script src="scripts/spotlights.js" defer></script>
+  <script src="scripts/events.js" defer></script>
+</body>
+</html>

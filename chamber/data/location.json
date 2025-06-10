@@ -1,0 +1,60 @@
+{
+    "location": [
+        {
+            "title": "Bwindi Impenetrable Forest",
+            "image": "images/Bwindi.jpg",
+            "address": "Southwest Uganda",
+            "description": "Famous for gorilla trekking and biodiversity.",
+            "url": "https://ugandawildlife.org/national-parks/bwindi-impenetrable-national-park"
+        },
+        {
+            "title": "Murchison Falls",
+            "image": "images/Murchison.jpg",
+            "address": "Northwestern Uganda",
+            "description": "Known for its powerful waterfall and wildlife.",
+            "url": "https://ugandawildlife.org/national-parks/murchison-falls-national-park"
+        },
+        {
+            "title": "Lake Victoria",
+            "image": "images/victoria1.jpg",
+            "address": "Central Uganda",
+            "description": "The largest lake in Africa, offering many water activities.",
+            "url": "https://en.wikipedia.org/wiki/Lake_Victoria"
+        },
+        {
+            "title": "Kidepo Valley National Park",
+            "image": "images/Kidepo.jpg",
+            "address": "Northeastern Uganda",
+            "description": "Famous for its stunning landscapes and wildlife.",
+            "url": "https://ugandawildlife.org/national-parks/kidepo-valley-national-park"
+        },
+        {
+            "title": "Fort Portal",
+            "image": "images/FortPortal.jpg",
+            "address": "Western Uganda",
+            "description": "A scenic town near crater lakes and national parks.",
+            "url": "https://fortportalcity.go.ug/"
+        },
+        {
+            "title": "Jinja",
+            "image": "images/jinja-city.jpg",
+            "address": "Eastern Uganda",
+            "description": "Home to the source of the Nile and adventure activities.",
+            "url": "https://www.brilliant-uganda.com/jinja"
+        },
+{
+    "title": "Rwenzori Mountains",
+    "image": "images/Rwenzori.jpg",
+    "address": "Western Uganda",
+    "description": "Known as the 'Mountains of the Moon' with unique glaciers.",
+    "url": "https://www.rwenzorimountainsnationalpark.com/"
+},
+        {
+            "title": "Entebbe Botanical Gardens",
+            "image": "images/entebbe1.jpg",
+            "address": "Entebbe, Central Uganda",
+            "description": "A beautiful garden by Lake Victoria.",
+            "url": "https://ugandatourismcenter.com/place/botanical-gardens-in-entebbe/"
+        }
+    ]
+}

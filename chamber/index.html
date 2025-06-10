@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Welcome to the Kabale Chamber of Commerce. Discover local businesses, upcoming events, and join our thriving community.">
-  <meta name="author" content="Kabale Chamber Web Team">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Welcome to the Kabale Chamber of Commerce. Discover local businesses, upcoming events, and join our thriving community." />
+  <meta name="author" content="Kabale Chamber Web Team" />
   <title>Kabale Chamber of Commerce | Home</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
     <div class="container nav-wrapper">
-      <a href="index.html" class="hero-image-wrapper" aria-label="Kabale Chamber of Commerce Home">
-        <img src="images/hero.jpg" alt="Kabale cityscape and hills" class="hero-image" loading="lazy">
-        <h1>Kabale Chamber of Commerce</h1>
-      </a>
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="mainNav" aria-expanded="false">&#9776;</button>
+      <h1>Kabale Chamber of Commerce</h1>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleNavMenu()">
+        &#9776;
+      </button>
       <nav>
         <ul id="mainNav">
           <li><a href="index.html" class="active" aria-current="page">Home</a></li>
           <li><a href="discover.html">Discover</a></li>
           <li><a href="directory.html">Directory</a></li>
           <li><a href="join.html">Join</a></li>
-          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -39,150 +37,382 @@
       </div>
     </section>
 
-    <!-- About Chamber -->
-    <section class="about-chamber" aria-label="About Chamber">
-      <h2>Our Mission</h2>
-      <p>To promote and support local businesses, advocate for economic growth, and enhance the prosperity of the Kabale community.</p>
-      <h2>Our Vision</h2>
-      <p>To be the leading voice and resource for business in Kabale, fostering a vibrant and sustainable economy.</p>
-      <h2>Our Values</h2>
-      <ul>
-        <li>Integrity</li>
-        <li>Collaboration</li>
-        <li>Innovation</li>
-        <li>Community</li>
-        <li>Excellence</li>
-      </ul>
-    </section>
+    <!-- Toggle Display Buttons -->
+    <div class="toggle-display-btns" aria-label="Toggle member display">
+      <button id="gridBtn" class="active" type="button" aria-pressed="true">Grid View</button>
+      <button id="listBtn" type="button" aria-pressed="false">List View</button>
+    </div>
 
-    <!-- Display Toggle & Search -->
-    <section class="member-controls" aria-label="Control Member View">
-      <div class="toggle-display-btns" role="group" aria-label="Toggle member display">
-        <button id="gridBtn" class="active" aria-pressed="true" type="button">Grid View</button>
-        <button id="listBtn" aria-pressed="false" type="button">List View</button>
-      </div>
-
-      <form class="search-form" id="searchForm" autocomplete="off" aria-label="Search Chamber Members">
-        <label for="searchInput">Search Chamber Members:</label>
-        <input type="search" id="searchInput" placeholder="Enter name, category, or address..." aria-label="Search Chamber Members">
-        <button type="submit">Search</button>
-        <button type="button" id="clearSearchBtn">Clear</button>
-        <div class="search-results" id="searchResults" aria-live="polite"></div>
-      </form>
-    </section>
+    <!-- Search Members -->
+    <form class="search-form" id="searchForm" autocomplete="off" aria-label="Search Chamber Members">
+      <label for="searchInput">Search Chamber Members:</label>
+      <input type="text" id="searchInput" placeholder="Enter name, category, or address..." />
+      <button type="submit">Search</button>
+      <button type="button" id="clearSearchBtn">Clear</button>
+      <div class="search-results" id="searchResults"></div>
+    </form>
 
     <!-- Members Display -->
-    <section class="members-display" id="membersDisplay" aria-label="Chamber Members">
-      <!-- JavaScript dynamically populates member cards here -->
-    </section>
+    <div class="members-display" id="membersDisplay"></div>
 
-    <!-- Main Content Sections -->
     <div class="main-sections">
-      <!-- Events -->
+      <!-- Events Section -->
       <section aria-labelledby="events-title">
         <h2 id="events-title">Upcoming Events</h2>
         <ul>
           <li>
             <strong>Business Networking Breakfast</strong><br>
-            <time datetime="2025-06-15T08:00">June 15, 2025 &mdash; 8:00 AM</time><br>
-            Kabale Resort Hotel
+            <span>June 15, 2025 &mdash; 8:00 AM</span><br>
+            <span>Kabale Resort Hotel</span>
           </li>
           <li>
             <strong>Annual General Meeting</strong><br>
-            <time datetime="2025-07-10T10:00">July 10, 2025 &mdash; 10:00 AM</time><br>
-            Chamber Conference Hall
+            <span>July 10, 2025 &mdash; 10:00 AM</span><br>
+            <span>Chamber Conference Hall</span>
           </li>
           <li>
             <strong>Entrepreneurship Workshop</strong><br>
-            <time datetime="2025-08-05T14:00">August 5, 2025 &mdash; 2:00 PM</time><br>
-            Online (Zoom)
+            <span>August 5, 2025 &mdash; 2:00 PM</span><br>
+            <span>Online (Zoom)</span>
           </li>
         </ul>
       </section>
 
-      <!-- Weather -->
+      <!-- Weather Section -->
       <section aria-labelledby="weather-title">
         <h2 id="weather-title">Kabale Weather</h2>
         <div id="weather">
           <div class="weather-today">
-            <img id="weather-icon" src="" alt="Weather icon" style="display:none" loading="lazy">
+            <img id="weather-icon" src="" alt="" style="display:none;">
             <div>
               <span id="weather-temp">--°C</span>
               <span id="weather-desc"></span>
             </div>
           </div>
           <div class="forecast" id="forecast">
-            <noscript>Weather information is unavailable without JavaScript.</noscript>
+            <!-- Forecast days will be rendered here by JS -->
           </div>
         </div>
-        <button id="refreshWeatherBtn" type="button">Refresh Weather</button>
+        <button type="button" class="refresh-spotlights-btn" id="refreshWeatherBtn">Refresh Weather</button>
       </section>
     </div>
 
-    <!-- Spotlights -->
+    <!-- Spotlights Section -->
     <section aria-labelledby="spotlights-title">
       <h2 id="spotlights-title">Member Spotlights</h2>
-      <div class="spotlights" id="spotlights">
-        <noscript>Spotlights are unavailable without JavaScript.</noscript>
-      </div>
-      <button id="refreshSpotlightsBtn" type="button">Show Other Spotlights</button>
-    </section>
-
-    <!-- Join Section -->
-    <section aria-labelledby="join-title">
-      <h2 id="join-title">Become a Member</h2>
-      <p>Join the Kabale Chamber of Commerce to access exclusive resources, networking opportunities, and business support.</p>
-      <a href="join.html" class="cta-btn">Join Now</a>
-    </section>
-
-    <!-- Contact Section -->
-    <section aria-labelledby="contact-title">
-      <h2 id="contact-title">Contact Us</h2>
-      <address>
-        <strong>Kabale Chamber of Commerce</strong><br>
-        P.O. Box 123, Kabale, Uganda<br>
-        Email: <a href="mailto:info@kabalechamber.org">info@kabalechamber.org</a><br>
-        Phone: <a href="tel:+256700000000">+256 700 000 000</a>
-      </address>
-      <a href="contact.html" class="cta-btn">Contact Form</a>
+      <div class="spotlights" id="spotlights"></div>
+      <button type="button" class="refresh-spotlights-btn" id="refreshSpotlightsBtn">Show Other Spotlights</button>
     </section>
 
     <!-- Feedback Form -->
-    <section aria-labelledby="feedback-form-title">
-      <h2 id="feedback-form-title">Feedback</h2>
-      <form class="feedback-form" id="feedbackForm" autocomplete="off" aria-label="Send Feedback">
-        <label for="feedbackInput">We value your feedback! Let us know your thoughts:</label>
-        <textarea id="feedbackInput" required placeholder="Type your feedback here..." rows="4"></textarea>
-        <button type="submit">Send Feedback</button>
-        <div id="feedbackMsg" style="margin-top:0.7rem;" aria-live="polite"></div>
-      </form>
-    </section>
+    <form class="feedback-form" id="feedbackForm" autocomplete="off" aria-label="Send Feedback">
+      <label for="feedbackInput">We value your feedback! Let us know your thoughts:</label>
+      <textarea id="feedbackInput" required placeholder="Type your feedback here..."></textarea>
+      <button type="submit">Send Feedback</button>
+      <div id="feedbackMsg" style="margin-top:0.7rem;"></div>
+    </form>
   </main>
 
   <footer>
     <div class="container">
-      <p>
-        <a href="https://validator.w3.org/nu/?doc=https://yourdomain.com/wdd231/chamber/index.html" target="_blank" rel="noopener">Validate HTML</a>
-      </p>
       <p>&copy; 2025 Kabale Chamber of Commerce. All rights reserved.</p>
-      <p>
-        <a href="privacy.html">Privacy Policy</a> | 
-        <a href="terms.html">Terms of Service</a>
-      </p>
-      <p class="socials">
-        <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
-          <img src="images/facebook.svg" alt="Facebook" style="height:1.2em;" loading="lazy">
-        </a>
-        <a href="https://www.twitter.com/" target="_blank" rel="noopener" aria-label="Twitter">
-          <img src="images/twitter.svg" alt="Twitter" style="height:1.2em;" loading="lazy">
-        </a>
-        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <img src="images/linkedin.svg" alt="LinkedIn" style="height:1.2em;" loading="lazy">
-        </a>
-      </p>
     </div>
   </footer>
 
-  <script src="scripts/scripts.js" defer></script>
+  <script>
+    // Responsive nav menu toggle
+    function toggleNavMenu() {
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('open');
+    }
+
+    // Wayfinding: highlight current nav link
+    document.querySelectorAll('nav a').forEach(link => {
+      if (link.href && window.location.href.includes(link.getAttribute('href'))) {
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+      }
+    });
+
+    // Chamber members data
+    const membersData = [
+      {
+        name: "Green Hills Coffee",
+        category: "Coffee Shop",
+        address: "12 Main Street, Kabale",
+        phone: "+256 712 345 678",
+        website: "https://greenhillscoffe.ug",
+        image: "",
+        membership: 1,
+        info: ""
+      },
+      {
+        name: "Rwenzori Tech Solutions",
+        category: "IT Services",
+        address: "8 Tech Park, Kabale",
+        phone: "+256 702 112 233",
+        website: "https://rwenzoritec.ug",
+        image: "",
+        membership: 1,
+        info: ""
+      },
+      {
+        name: "TechNova Ltd",
+        category: "Software Company",
+        address: "Plot 45, Kampala Road, Uganda",
+        phone: "+256 701 123456",
+        website: "https://www.technova.ug",
+        image: "technova.jpg",
+        membership: 3,
+        info: "Leading software company specializing in fintech solutions."
+      },
+      {
+        name: "Green Harvest",
+        category: "Agriculture",
+        address: "Mbale, Eastern Uganda",
+        phone: "+256 712 334455",
+        website: "https://greenharvest.ug",
+        image: "greenharvest.jpg",
+        membership: 2,
+        info: "Organic farming and agricultural consultancy."
+      },
+      {
+        name: "Safari Wheels",
+        category: "Tourism",
+        address: "Entebbe Highway, Uganda",
+        phone: "+256 755 987654",
+        website: "https://safariwheels.ug",
+        image: "safariwheels.jpg",
+        membership: 1,
+        info: "Tour company offering guided safaris."
+      },
+      {
+        name: "EduSmart",
+        category: "Education",
+        address: "Kira Road, Kampala",
+        phone: "+256 770 554433",
+        website: "https://edusmart.ug",
+        image: "edusmart.jpg",
+        membership: 3,
+        info: "E-learning solutions for schools and universities."
+      },
+      {
+        name: "ByteFix",
+        category: "IT Services",
+        address: "Industrial Area, Kampala",
+        phone: "+256 786 112233",
+        website: "https://bytefix.ug",
+        image: "bytefix.jpg",
+        membership: 1,
+        info: "Computer repair and IT maintenance services."
+      },
+      {
+        name: "Urban Foods",
+        category: "Restaurant",
+        address: "Gulu City, Uganda",
+        phone: "+256 758 667788",
+        website: "https://urbanfoods.ug",
+        image: "urbanfoods.jpg",
+        membership: 2,
+        info: "Fast food restaurant with local cuisine focus."
+      },
+      {
+        name: "SolarBright",
+        category: "Renewable Energy",
+        address: "Jinja Road, Uganda",
+        phone: "+256 701 998877",
+        website: "https://solarbright.ug",
+        image: "solarbright.jpg",
+        membership: 3,
+        info: "Renewable energy company specializing in solar panels."
+      }
+    ];
+
+    // --- Member Display Toggle ---
+    let currentDisplay = 'grid'; // or 'list'
+    let lastSearchResults = membersData;
+
+    function memberCardHTML(member) {
+      return `
+        <div class="member-card">
+          <span class="spotlight-level${member.membership === 2 ? ' silver' : member.membership === 3 ? ' gold' : ''}">
+            ${member.membership === 3 ? 'Gold Member' : member.membership === 2 ? 'Silver Member' : 'Member'}
+          </span>
+          ${currentDisplay === 'grid' && member.image ? `<img src="images/${member.image}" alt="${member.name} Logo">` : ''}
+          <div class="member-name">${member.name}</div>
+          <div><strong>Category:</strong> ${member.category || 'N/A'}</div>
+          <div><strong>Address:</strong> ${member.address}</div>
+          <div><strong>Phone:</strong> ${member.phone}</div>
+          <div><strong>Website:</strong> <a href="${member.website}" target="_blank" rel="noopener">${member.website.replace(/^https?:\/\//, '')}</a></div>
+          ${member.info ? `<div>${member.info}</div>` : ''}
+        </div>
+      `;
+    }
+
+    function renderMembers(members) {
+      const container = document.getElementById('membersDisplay');
+      if (!members || !members.length) {
+        container.innerHTML = '<p style="margin:1.2rem 0;">No members found.</p>';
+        return;
+      }
+      container.innerHTML = `<div class="members-${currentDisplay}">${members.map(memberCardHTML).join('')}</div>`;
+    }
+
+    function filteredMembers() {
+      return lastSearchResults;
+    }
+
+    // Toggle display buttons
+    document.getElementById('gridBtn').addEventListener('click', function() {
+      if (currentDisplay !== 'grid') {
+        currentDisplay = 'grid';
+        this.classList.add('active');
+        this.setAttribute('aria-pressed', 'true');
+        document.getElementById('listBtn').classList.remove('active');
+        document.getElementById('listBtn').setAttribute('aria-pressed', 'false');
+        renderMembers(filteredMembers());
+      }
+    });
+    document.getElementById('listBtn').addEventListener('click', function() {
+      if (currentDisplay !== 'list') {
+        currentDisplay = 'list';
+        this.classList.add('active');
+        this.setAttribute('aria-pressed', 'true');
+        document.getElementById('gridBtn').classList.remove('active');
+        document.getElementById('gridBtn').setAttribute('aria-pressed', 'false');
+        renderMembers(filteredMembers());
+      }
+    });
+
+    // --- Search ---
+    function renderSearchResults(results) {
+      lastSearchResults = results.length ? results : membersData;
+      renderMembers(lastSearchResults);
+    }
+    document.getElementById('searchForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const query = document.getElementById('searchInput').value.trim().toLowerCase();
+      if (!query) {
+        renderSearchResults(membersData);
+        return;
+      }
+      const results = membersData.filter(m =>
+        Object.values(m).some(val =>
+          typeof val === 'string' && val.toLowerCase().includes(query)
+        )
+      );
+      renderSearchResults(results);
+    });
+    document.getElementById('clearSearchBtn').addEventListener('click', function() {
+      document.getElementById('searchInput').value = '';
+      renderSearchResults(membersData);
+    });
+
+    // --- Spotlights ---
+    function renderSpotlights() {
+      const spotlightsDiv = document.getElementById('spotlights');
+      spotlightsDiv.innerHTML = '';
+      const eligible = membersData.filter(m => m.membership === 2 || m.membership === 3);
+      const shuffled = eligible
+        .map(m => ({ m, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ m }) => m)
+        .slice(0, 3);
+      shuffled.forEach(member => {
+        const card = document.createElement('div');
+        card.className = 'spotlight-card';
+        card.innerHTML = `
+          <span class="spotlight-level${member.membership === 2 ? ' silver' : member.membership === 3 ? ' gold' : ''}">
+            ${member.membership === 3 ? 'Gold Member' : 'Silver Member'}
+          </span>
+          ${member.image ? `<img src="images/${member.image}" alt="${member.name} Logo">` : ''}
+          <h3>${member.name}</h3>
+          <p><strong>Category:</strong> ${member.category || 'N/A'}</p>
+          <p><strong>Address:</strong> ${member.address}</p>
+          <p><strong>Phone:</strong> ${member.phone}</p>
+          <p><strong>Website:</strong> <a href="${member.website}" target="_blank" rel="noopener">${member.website.replace(/^https?:\/\//, '')}</a></p>
+          ${member.info ? `<p>${member.info}</p>` : ''}
+        `;
+        spotlightsDiv.appendChild(card);
+      });
+    }
+    document.getElementById('refreshSpotlightsBtn').addEventListener('click', renderSpotlights);
+
+    // --- Weather ---
+    const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY';
+    const kabaleLat = -1.2486;
+    const kabaleLon = 29.9897;
+    function fetchWeather() {
+      fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${kabaleLat}&lon=${kabaleLon}&appid=${apiKey}&units=metric`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('weather-temp').textContent = Math.round(data.main.temp) + '°C';
+          document.getElementById('weather-desc').textContent = data.weather[0].description;
+          const icon = data.weather[0].icon;
+          const iconImg = document.getElementById('weather-icon');
+          iconImg.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+          iconImg.alt = data.weather[0].description;
+          iconImg.style.display = 'inline-block';
+        })
+        .catch(() => {
+          document.getElementById('weather-temp').textContent = '--°C';
+          document.getElementById('weather-desc').textContent = 'Weather unavailable';
+          document.getElementById('weather-icon').style.display = 'none';
+        });
+      fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${kabaleLat}&lon=${kabaleLon}&appid=${apiKey}&units=metric`)
+        .then(res => res.json())
+        .then(data => {
+          const forecastDiv = document.getElementById('forecast');
+          forecastDiv.innerHTML = '';
+          const days = {};
+          data.list.forEach(item => {
+            const date = new Date(item.dt_txt);
+            const day = date.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
+            if (!days[day]) days[day] = [];
+            days[day].push(item);
+          });
+          const today = new Date().toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
+          const dayNames = Object.keys(days).filter(d => d !== today);
+          dayNames.slice(0, 3).forEach(day => {
+            const temps = days[day].map(i => i.main.temp);
+            const avgTemp = Math.round(temps.reduce((a, b) => a + b, 0) / temps.length);
+            let icon = days[day][Math.floor(days[day].length/2)].weather[0].icon;
+            let desc = days[day][Math.floor(days[day].length/2)].weather[0].description;
+            forecastDiv.innerHTML += `
+              <div class="forecast-day">
+                <div>${day}</div>
+                <img src="https://openweathermap.org/img/wn/${icon}.png" alt="${desc}" title="${desc}">
+                <div>${avgTemp}°C</div>
+              </div>
+            `;
+          });
+        })
+        .catch(() => {
+          document.getElementById('forecast').innerHTML = '<div>Forecast unavailable</div>';
+        });
+    }
+    document.getElementById('refreshWeatherBtn').addEventListener('click', fetchWeather);
+
+    // --- Feedback Form ---
+    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const feedback = document.getElementById('feedbackInput').value.trim();
+      const msgDiv = document.getElementById('feedbackMsg');
+      if (feedback.length < 2) {
+        msgDiv.textContent = "Please enter your feedback.";
+        msgDiv.style.color = "red";
+        return;
+      }
+      msgDiv.textContent = "Thank you for your feedback!";
+      msgDiv.style.color = "green";
+      document.getElementById('feedbackInput').value = '';
+      setTimeout(() => { msgDiv.textContent = ''; }, 4000);
+    });
+
+    // --- Initial renders ---
+    renderMembers(membersData);
+    renderSpotlights();
+    fetchWeather();
+  </script>
 </body>
 </html>
