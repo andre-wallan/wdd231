@@ -13,7 +13,7 @@
   <header>
     <div class="container nav-wrapper">
       <h1>Kabale Chamber of Commerce</h1>
-      <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleNavMenu()">
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNav" id="navToggleBtn"></button>
         &#9776;
       </button>
       <nav>
@@ -55,7 +55,7 @@
       </form>
 
       <!-- Members Display -->
-      <div class="members-display" id="membersDisplay"></div>
+      <div class="members-display" id="membersDisplay"></div> 
     </section>
 
     <section class="main-sections">
@@ -126,10 +126,12 @@
 
   <script>
     // --- Navigation ---
-    function toggleNavMenu() {
+    document.getElementById('navToggleBtn').addEventListener('click', function() {
       const nav = document.getElementById('mainNav');
       nav.classList.toggle('open');
-    }
+      const expanded = nav.classList.contains('open');
+      this.setAttribute('aria-expanded', expanded);
+    });
 
     // --- DOMContentLoaded ---
     document.addEventListener('DOMContentLoaded', function() {
@@ -138,6 +140,9 @@
         if (link.href && window.location.href.includes(link.getAttribute('href'))) {
           link.classList.add('active');
           link.setAttribute('aria-current', 'page');
+        } else {
+          link.classList.remove('active');
+          link.removeAttribute('aria-current');
         }
       });
 
@@ -160,15 +165,15 @@
 
       function memberCardHTML(member) {
         return `
-          <div class="member-card">
+          <div class="member-card${currentDisplay === 'list' ? ' list-view' : ''}">
             <span class="spotlight-level${member.membership === 2 ? ' silver' : member.membership === 3 ? ' gold' : ''}">
               ${member.membership === 3 ? 'Gold Member' : member.membership === 2 ? 'Silver Member' : 'Member'}
             </span>
-            ${currentDisplay === 'grid' && member.image ? `<img src="images/${member.image}" alt="${member.name} Logo">` : ''}
+            ${member.image ? `<img src="images/${member.image}" alt="${member.name} Logo">` : ''}
             <div class="member-name">${member.name}</div>
             <div><strong>Category:</strong> ${member.category || 'N/A'}</div>
             <div><strong>Address:</strong> ${member.address}</div>
-            <div><strong>Phone:</strong> ${member.phone}</div>
+            <div><strong>Phone:</strong> <a href="tel:${member.phone.replace(/\s+/g,'')}">${member.phone}</a></div>
             <div><strong>Website:</strong> <a href="${member.website}" target="_blank" rel="noopener">${member.website.replace(/^https?:\/\//, '')}</a></div>
             ${member.info ? `<div>${member.info}</div>` : ''}
           </div>
@@ -208,7 +213,7 @@
 
       // --- Search ---
       function renderSearchResults(results) {
-        lastSearchResults = results.length ? results : membersData;
+        lastSearchResults = results.length ? results : [];
         renderMembers(lastSearchResults);
       }
       document.getElementById('searchForm').addEventListener('submit', function(e) {
@@ -235,11 +240,15 @@
         const spotlightsDiv = document.getElementById('spotlights');
         spotlightsDiv.innerHTML = '';
         const eligible = membersData.filter(m => m.membership === 2 || m.membership === 3);
+        if (eligible.length === 0) {
+          spotlightsDiv.innerHTML = '<p>No spotlight members available.</p>';
+          return;
+        }
         const shuffled = eligible
           .map(m => ({ m, sort: Math.random() }))
           .sort((a, b) => a.sort - b.sort)
           .map(({ m }) => m)
-          .slice(0, 3);
+          .slice(0, Math.min(3, eligible.length));
         shuffled.forEach(member => {
           const card = document.createElement('div');
           card.className = 'spotlight-card';
@@ -251,7 +260,7 @@
             <h3>${member.name}</h3>
             <p><strong>Category:</strong> ${member.category || 'N/A'}</p>
             <p><strong>Address:</strong> ${member.address}</p>
-            <p><strong>Phone:</strong> ${member.phone}</p>
+            <p><strong>Phone:</strong> <a href="tel:${member.phone.replace(/\s+/g,'')}">${member.phone}</a></p>
             <p><strong>Website:</strong> <a href="${member.website}" target="_blank" rel="noopener">${member.website.replace(/^https?:\/\//, '')}</a></p>
             ${member.info ? `<p>${member.info}</p>` : ''}
           `;
@@ -329,6 +338,14 @@
         msgDiv.style.color = "green";
         document.getElementById('feedbackInput').value = '';
         setTimeout(() => { msgDiv.textContent = ''; }, 4000);
+      });
+
+      // --- Keyboard Accessibility for Nav Toggle ---
+      document.getElementById('navToggleBtn').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
       });
 
       // --- Initial renders ---
