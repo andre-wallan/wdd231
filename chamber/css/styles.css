@@ -441,7 +441,13 @@ nav a:focus {
   background: #eaf6ff;
   color: #223354;
 }
-
+/* hero back ground */
+background {
+  background-image: url('images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 /* Display */
 .members-flex-container {
   display: grid;
