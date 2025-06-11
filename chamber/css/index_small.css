@@ -1,0 +1,28 @@
+/* Responsive design */
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+    .courses {
+        grid-template-columns: 1fr;
+    }
+    .hamburger {
+        display: block; /* Show hamburger on small screens */
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+    /* Add this to your styles/index.css */
+    .courses button.completed {
+        background-color: #4CAF50; /* Green background for completed courses */
+        color: black /* White text color */
+    }
+
+    nav ul {
+        display: none; /* Hide menu items initially */
+    }
+
+    nav ul.active {
+        display: block; /* Show menu items when active */
+    }
+}
