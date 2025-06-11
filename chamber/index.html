@@ -37,25 +37,28 @@
       </div>
     </section>
 
-    <!-- Toggle Display Buttons -->
-    <div class="toggle-display-btns" aria-label="Toggle member display">
-      <button id="gridBtn" class="active" type="button" aria-pressed="true">Grid View</button>
-      <button id="listBtn" type="button" aria-pressed="false">List View</button>
-    </div>
+    <!-- Member Tools Section -->
+    <section aria-label="Member Tools">
+      <!-- Toggle Display Buttons -->
+      <div class="toggle-display-btns" aria-label="Toggle member display">
+        <button id="gridBtn" class="active" type="button" aria-pressed="true">Grid View</button>
+        <button id="listBtn" type="button" aria-pressed="false">List View</button>
+      </div>
 
-    <!-- Search Members -->
-    <form class="search-form" id="searchForm" autocomplete="off" aria-label="Search Chamber Members">
-      <label for="searchInput">Search Chamber Members:</label>
-      <input type="text" id="searchInput" placeholder="Enter name, category, or address..." />
-      <button type="submit">Search</button>
-      <button type="button" id="clearSearchBtn">Clear</button>
-      <div class="search-results" id="searchResults"></div>
-    </form>
+      <!-- Search Members -->
+      <form class="search-form" id="searchForm" autocomplete="off" aria-label="Search Chamber Members">
+        <label for="searchInput">Search Chamber Members:</label>
+        <input type="text" id="searchInput" placeholder="Enter name, category, or address..." />
+        <button type="submit">Search</button>
+        <button type="button" id="clearSearchBtn">Clear</button>
+        <div class="search-results" id="searchResults"></div>
+      </form>
 
-    <!-- Members Display -->
-    <div class="members-display" id="membersDisplay"></div>
+      <!-- Members Display -->
+      <div class="members-display" id="membersDisplay"></div>
+    </section>
 
-    <div class="main-sections">
+    <section class="main-sections">
       <!-- Events Section -->
       <section aria-labelledby="events-title">
         <h2 id="events-title">Upcoming Events</h2>
@@ -95,7 +98,7 @@
         </div>
         <button type="button" class="refresh-spotlights-btn" id="refreshWeatherBtn">Refresh Weather</button>
       </section>
-    </div>
+    </section>
 
     <!-- Spotlights Section -->
     <section aria-labelledby="spotlights-title">
@@ -105,12 +108,14 @@
     </section>
 
     <!-- Feedback Form -->
-    <form class="feedback-form" id="feedbackForm" autocomplete="off" aria-label="Send Feedback">
-      <label for="feedbackInput">We value your feedback! Let us know your thoughts:</label>
-      <textarea id="feedbackInput" required placeholder="Type your feedback here..."></textarea>
-      <button type="submit">Send Feedback</button>
-      <div id="feedbackMsg" style="margin-top:0.7rem;"></div>
-    </form>
+    <section aria-label="Feedback">
+      <form class="feedback-form" id="feedbackForm" autocomplete="off" aria-label="Send Feedback">
+        <label for="feedbackInput">We value your feedback! Let us know your thoughts:</label>
+        <textarea id="feedbackInput" required placeholder="Type your feedback here..."></textarea>
+        <button type="submit">Send Feedback</button>
+        <div id="feedbackMsg" style="margin-top:0.7rem;"></div>
+      </form>
+    </section>
   </main>
 
   <footer>
@@ -120,14 +125,15 @@
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Responsive nav menu toggle
-      window.toggleNavMenu = function() {
-        const nav = document.getElementById('mainNav');
-        nav.classList.toggle('open');
-      };
+    // --- Navigation ---
+    function toggleNavMenu() {
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('open');
+    }
 
-      // Wayfinding: highlight current nav link
+    // --- DOMContentLoaded ---
+    document.addEventListener('DOMContentLoaded', function() {
+      // Highlight current nav link
       document.querySelectorAll('nav a').forEach(link => {
         if (link.href && window.location.href.includes(link.getAttribute('href'))) {
           link.classList.add('active');
@@ -135,102 +141,21 @@
         }
       });
 
-      // Chamber members data
+      // --- Chamber Members Data ---
       const membersData = [
-        {
-          name: "Green Hills Coffee",
-          category: "Coffee Shop",
-          address: "12 Main Street, Kabale",
-          phone: "+256 712 345 678",
-          website: "https://greenhillscoffe.ug",
-          image: "",
-          membership: 1,
-          info: ""
-        },
-        {
-          name: "Rwenzori Tech Solutions",
-          category: "IT Services",
-          address: "8 Tech Park, Kabale",
-          phone: "+256 702 112 233",
-          website: "https://rwenzoritec.ug",
-          image: "",
-          membership: 1,
-          info: ""
-        },
-        {
-          name: "TechNova Ltd",
-          category: "Software Company",
-          address: "Plot 45, Kampala Road, Uganda",
-          phone: "+256 701 123456",
-          website: "https://www.technova.ug",
-          image: "technova.jpg",
-          membership: 3,
-          info: "Leading software company specializing in fintech solutions."
-        },
-        {
-          name: "Green Harvest",
-          category: "Agriculture",
-          address: "Mbale, Eastern Uganda",
-          phone: "+256 712 334455",
-          website: "https://greenharvest.ug",
-          image: "greenharvest.jpg",
-          membership: 2,
-          info: "Organic farming and agricultural consultancy."
-        },
-        {
-          name: "Safari Wheels",
-          category: "Tourism",
-          address: "Entebbe Highway, Uganda",
-          phone: "+256 755 987654",
-          website: "https://safariwheels.ug",
-          image: "safariwheels.jpg",
-          membership: 1,
-          info: "Tour company offering guided safaris."
-        },
-        {
-          name: "EduSmart",
-          category: "Education",
-          address: "Kira Road, Kampala",
-          phone: "+256 770 554433",
-          website: "https://edusmart.ug",
-          image: "edusmart.jpg",
-          membership: 3,
-          info: "E-learning solutions for schools and universities."
-        },
-        {
-          name: "ByteFix",
-          category: "IT Services",
-          address: "Industrial Area, Kampala",
-          phone: "+256 786 112233",
-          website: "https://bytefix.ug",
-          image: "bytefix.jpg",
-          membership: 1,
-          info: "Computer repair and IT maintenance services."
-        },
-        {
-          name: "Urban Foods",
-          category: "Restaurant",
-          address: "Gulu City, Uganda",
-          phone: "+256 758 667788",
-          website: "https://urbanfoods.ug",
-          image: "urbanfoods.jpg",
-          membership: 2,
-          info: "Fast food restaurant with local cuisine focus."
-        },
-        {
-          name: "SolarBright",
-          category: "Renewable Energy",
-          address: "Jinja Road, Uganda",
-          phone: "+256 701 998877",
-          website: "https://solarbright.ug",
-          image: "solarbright.jpg",
-          membership: 3,
-          info: "Renewable energy company specializing in solar panels."
-        }
+        { name: "Green Hills Coffee", category: "Coffee Shop", address: "12 Main Street, Kabale", phone: "+256 712 345 678", website: "https://greenhillscoffe.ug", image: "", membership: 1, info: "" },
+        { name: "Rwenzori Tech Solutions", category: "IT Services", address: "8 Tech Park, Kabale", phone: "+256 702 112 233", website: "https://rwenzoritec.ug", image: "", membership: 1, info: "" },
+        { name: "TechNova Ltd", category: "Software Company", address: "Plot 45, Kampala Road, Uganda", phone: "+256 701 123456", website: "https://www.technova.ug", image: "technova.jpg", membership: 3, info: "Leading software company specializing in fintech solutions." },
+        { name: "Green Harvest", category: "Agriculture", address: "Mbale, Eastern Uganda", phone: "+256 712 334455", website: "https://greenharvest.ug", image: "greenharvest.jpg", membership: 2, info: "Organic farming and agricultural consultancy." },
+        { name: "Safari Wheels", category: "Tourism", address: "Entebbe Highway, Uganda", phone: "+256 755 987654", website: "https://safariwheels.ug", image: "safariwheels.jpg", membership: 1, info: "Tour company offering guided safaris." },
+        { name: "EduSmart", category: "Education", address: "Kira Road, Kampala", phone: "+256 770 554433", website: "https://edusmart.ug", image: "edusmart.jpg", membership: 3, info: "E-learning solutions for schools and universities." },
+        { name: "ByteFix", category: "IT Services", address: "Industrial Area, Kampala", phone: "+256 786 112233", website: "https://bytefix.ug", image: "bytefix.jpg", membership: 1, info: "Computer repair and IT maintenance services." },
+        { name: "Urban Foods", category: "Restaurant", address: "Gulu City, Uganda", phone: "+256 758 667788", website: "https://urbanfoods.ug", image: "urbanfoods.jpg", membership: 2, info: "Fast food restaurant with local cuisine focus." },
+        { name: "SolarBright", category: "Renewable Energy", address: "Jinja Road, Uganda", phone: "+256 701 998877", website: "https://solarbright.ug", image: "solarbright.jpg", membership: 3, info: "Renewable energy company specializing in solar panels." }
       ];
 
-      // --- Member Display Toggle ---
-      let currentDisplay = 'grid'; // or 'list'
+      // --- Member Display ---
+      let currentDisplay = 'grid';
       let lastSearchResults = membersData;
 
       function memberCardHTML(member) {
@@ -259,11 +184,7 @@
         container.innerHTML = `<div class="members-${currentDisplay}">${members.map(memberCardHTML).join('')}</div>`;
       }
 
-      function filteredMembers() {
-        return lastSearchResults;
-      }
-
-      // Toggle display buttons
+      // --- Display Toggle ---
       document.getElementById('gridBtn').addEventListener('click', function() {
         if (currentDisplay !== 'grid') {
           currentDisplay = 'grid';
@@ -271,7 +192,7 @@
           this.setAttribute('aria-pressed', 'true');
           document.getElementById('listBtn').classList.remove('active');
           document.getElementById('listBtn').setAttribute('aria-pressed', 'false');
-          renderMembers(filteredMembers());
+          renderMembers(lastSearchResults);
         }
       });
       document.getElementById('listBtn').addEventListener('click', function() {
@@ -281,7 +202,7 @@
           this.setAttribute('aria-pressed', 'true');
           document.getElementById('gridBtn').classList.remove('active');
           document.getElementById('gridBtn').setAttribute('aria-pressed', 'false');
-          renderMembers(filteredMembers());
+          renderMembers(lastSearchResults);
         }
       });
 
