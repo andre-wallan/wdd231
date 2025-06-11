@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Eco Green's curated selection of eco-friendly products.">
+  <meta name="author" content="Your Name">
+  <meta property="og:title" content="Eco Green Products">
+  <meta property="og:description" content="Explore sustainable products for everyday life.">
+  <title>Eco Green | Products</title>
+  <link rel="icon" href="favicon/favicon.ico">
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+  <script type="module" src="js/main.js" defer></script>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">Eco Green</a>
+      <button id="menu-toggle" aria-label="Open menu">☰</button>
+      <ul id="nav-links" class="hidden">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Eco-Friendly Products</h1>
+    <div id="products-container" class="grid"></div>
+
+    <div id="product-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-content">
+        <button id="modal-close" aria-label="Close modal">&times;</button>
+        <h2 id="modal-title"></h2>
+        <p id="modal-description"></p>
+        <p><strong>Category:</strong> <span id="modal-category"></span></p>
+        <p><strong>Price:</strong> $<span id="modal-price"></span></p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Eco Green</p>
+    <a href="attributions.html">Attributions</a> |
+    <a href="https://yourvideo.link" target="_blank">Project Video</a>
+  </footer>
+</body>
+</html>
