@@ -443,11 +443,11 @@ nav a:focus {
 }
 
 /* Display */
-.members-flex- {
-  display: flex;
-  flex-wrap: wrap;
+.members-flex-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 2rem;
-  justify-content: center;
+  justify-items: center;
   align-items: stretch;
   margin-bottom: 2.5rem;
 }
