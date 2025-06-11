@@ -16,7 +16,7 @@
         },
         {
             "title": "Lake Victoria",
-            "image": "images/victoria1.jpg",
+            "image": "images/lakevictoria.jpg",
             "address": "Central Uganda",
             "description": "The largest lake in Africa, offering many water activities.",
             "url": "https://en.wikipedia.org/wiki/Lake_Victoria"
@@ -51,7 +51,7 @@
 },
         {
             "title": "Entebbe Botanical Gardens",
-            "image": "images/entebbe1.jpg",
+            "image": "images/entebbe.jpg",
             "address": "Entebbe, Central Uganda",
             "description": "A beautiful garden by Lake Victoria.",
             "url": "https://ugandatourismcenter.com/place/botanical-gardens-in-entebbe/"
