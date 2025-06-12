@@ -9,13 +9,13 @@
     --text-color: #23272f;
     --primary-color: #25603b;
     --accent-color: #4ecb71;
-}
 
 [data-theme="dark"] {
     --bg-color: #181c20;
     --text-color: #f5f7fa;
     --primary-color: #4ecb71;
     --accent-color: #25603b;
+}
 }
 
 /* Typography */
