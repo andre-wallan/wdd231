@@ -28,30 +28,38 @@ function displayProducts(products) {
 }
 
 // Modal behavior
-const modal = document.getElementById('product-modal');
-const modalTitle = document.getElementById('modal-title');
-const modalDesc = document.getElementById('modal-description');
-const modalCategory = document.getElementById('modal-category');
-const modalPrice = document.getElementById('modal-price');
-const closeModal = document.getElementById('modal-close');
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('product-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalDesc = document.getElementById('modal-description');
+  const modalCategory = document.getElementById('modal-category');
+  const modalPrice = document.getElementById('modal-price');
+  const closeModal = document.getElementById('modal-close');
 
-function showModal(product) {
-  modalTitle.textContent = product.name;
-  modalDesc.textContent = product.description;
-  modalCategory.textContent = product.category;
-  modalPrice.textContent = product.price.toFixed(2);
-  modal.classList.remove('hidden');
-}
-
-closeModal.addEventListener('click', () => {
-  modal.classList.add('hidden');
-});
-
-window.addEventListener('click', e => {
-  if (e.target === modal) {
-    modal.classList.add('hidden');
+  function showModal(product) {
+    if (!modal || !modalTitle || !modalDesc || !modalCategory || !modalPrice) return;
+    modalTitle.textContent = product.name;
+    modalDesc.textContent = product.description;
+    modalCategory.textContent = product.category;
+    modalPrice.textContent = product.price.toFixed(2);
+    modal.classList.remove('hidden');
   }
+
+  window.showModal = showModal;
+
+  if (closeModal && modal) {
+    closeModal.addEventListener('click', () => {
+      modal.classList.add('hidden');
+    });
+  }
+
+  window.addEventListener('click', e => {
+    if (modal && e.target === modal) {
+      modal.classList.add('hidden');
+    }
+  });
 });
+
 export function applyTheme() {
   const savedTheme = localStorage.getItem('theme') || 'light';
   document.documentElement.setAttribute('data-theme', savedTheme);
@@ -77,3 +85,21 @@ export function setupThemeToggle() {
     toggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
   });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  fetch('data/tips.json')
+      .then(response => response.json())
+      .then(tips => {
+          const tipsContainer = document.getElementById('tips-container');
+          if (!tipsContainer) return;
+          tips.forEach(tip => {
+              const tipDiv = document.createElement('div');
+              tipDiv.className = 'tip';
+              tipDiv.innerHTML = `<strong>Tip:</strong> ${tip.tip} <em>(${tip.category})</em>`;
+              tipsContainer.appendChild(tipDiv);
+          });
+      })
+      .catch(error => {
+          console.error('Error loading tips:', error);
+      });
+});
