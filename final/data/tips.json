@@ -1,16 +1,12 @@
-// main.js
-
-fetch('data/tips.json')
-    .then(response => response.json())
-    .then(tips => {
-        const tipsContainer = document.getElementById('tips-container');
-        tips.forEach(tip => {
-            const tipDiv = document.createElement('div');
-            tipDiv.className = 'tip';
-            tipDiv.innerHTML = `<strong>Tip:</strong> ${tip.tip} <em>(${tip.category})</em>`;
-            tipsContainer.appendChild(tipDiv);
-        });
-    })
-    .catch(error => {
-        console.error('Error loading tips:', error);
-    });
+[
+  {
+    "id": 1,
+    "tip": "Use reusable shopping bags instead of plastic bags.",
+    "category": "home"
+  },
+  {
+    "id": 2,
+    "tip": "Switch to LED light bulbs to save energy.",
+    "category": "home"
+  }
+]
