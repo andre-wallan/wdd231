@@ -1,8 +1,14 @@
 // Responsive nav toggle
-const menuToggle = document.getElementById('menu-toggle');
-const navLinks = document.getElementById('nav-links');
-menuToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('hidden');
+document.addEventListener('DOMContentLoaded', () => {
+  const menuToggle = document.getElementById('menu-toggle');
+  const navLinks = document.getElementById('nav-links');
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', () => {
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', !expanded);
+      navLinks.classList.toggle('open');
+    });
+  }
 });
 
 // Fetch and display products
@@ -42,20 +48,20 @@ document.addEventListener('DOMContentLoaded', () => {
     modalDesc.textContent = product.description;
     modalCategory.textContent = product.category;
     modalPrice.textContent = product.price.toFixed(2);
-    modal.classList.remove('hidden');
+    modal.classList.remove('open');
   }
 
   window.showModal = showModal;
 
   if (closeModal && modal) {
     closeModal.addEventListener('click', () => {
-      modal.classList.add('hidden');
+      modal.classList.add('open');
     });
   }
 
   window.addEventListener('click', e => {
     if (modal && e.target === modal) {
-      modal.classList.add('hidden');
+      modal.classList.add('open');
     }
   });
 });
@@ -92,14 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(tips => {
           const tipsContainer = document.getElementById('tips-container');
           if (!tipsContainer) return;
-          tips.forEach(tip => {
-              const tipDiv = document.createElement('div');
-              tipDiv.className = 'tip';
-              tipDiv.innerHTML = `<strong>Tip:</strong> ${tip.tip} <em>(${tip.category})</em>`;
-              tipsContainer.appendChild(tipDiv);
-          });
-      })
-      .catch(error => {
-          console.error('Error loading tips:', error);
-      });
-});
+                  tips.forEach(tip => {
+                      const tipDiv = document.createElement('div');
+                      tipDiv.className = 'tip';
+                      tipDiv.innerHTML = `<strong>Tip:</strong> ${tip.tip} <em>(${tip.category})</em>`;
+                      tipsContainer.appendChild(tipDiv);
+                  });
+              });
+        });
