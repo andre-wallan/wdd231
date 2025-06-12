@@ -7,8 +7,8 @@ async function fetchProducts() {
     const res = await fetch("data/products.json");
     const data = await res.json();
     displayProducts(data);
-  } catch (err) {
-    productsContainer.innerHTML = "<p>Error loading products.</p>";
+  } catch (error) {
+    console.error("Failed to fetch products:", error);
   }
 }
 
