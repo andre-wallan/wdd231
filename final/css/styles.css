@@ -1,281 +1,315 @@
+/* =========================
+    CSS Reset & Base Styles
+    ========================= */
+*::before,
+*::after {
+     background: none !important;
+     color: inherit !important;
+     content: unset !important;
+}
+
 :root {
-    --primary: #25603b;         /* Deep green */
-    --accent: #e3e4e3;          /* Fresh green */
-    --text: #23272f;            /* Dark gray-blue */
-    --bg: #f9fafb;              /* Soft off-white */
-    --font-heading: 'Merriweather', serif;
-    --font-body: 'Open Sans', sans-serif;
-    --bg-color: #f9fafb;
-    --text-color: #23272f;
-    --primary-color: #25603b;
-    --accent-color: #cecfcf;
+     --primary: #25603b;         /* Deep green */
+     --accent: #e3e4e3;          /* Fresh green */
+     --text: #23272f;            /* Dark gray-blue */
+     --bg: #f9fafb;              /* Soft off-white */
+     --font-heading: 'Merriweather', serif;
+     --font-body: 'Open Sans', sans-serif;
+     --bg-color: #f9fafb;
+     --text-color: #23272f;
+     --primary-color: #25603b;
+     --accent-color: #cecfcf;
+}
 
 [data-theme="dark"] {
-    --bg-color: #181c20;
-    --text-color: #f5f7fa;
-    --primary-color: #f4f7f5;
-    --accent-color: #25603b;
-}
+     --bg-color: #181c20;
+     --text-color: #f5f7fa;
+     --primary-color: #f4f7f5;
+     --accent-color: #25603b;
 }
 
-/* Typography */
+/* =========================
+    Typography
+    ========================= */
 body {
-    font-family: var(--font-body);
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
+     font-family: var(--font-body);
+     background-color: var(--bg-color);
+     color: var(--text-color);
+     margin: 0;
+     padding: 0;
+     line-height: 1.6;
 }
 
-.h1 { 
-    color: #000308;
-    font-size: 2.5rem;
+.h1 {
+     color: #000308;
+     font-size: 2.5rem;
 }
 
 .logo {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    color: #050216;
-    text-decoration: none;
-    letter-spacing: 2px;
+     font-family: var(--font-heading);
+     font-size: 1.5rem;
+     color: #050216;
+     text-decoration: none;
+     letter-spacing: 2px;
 }
 
-/* Layout */
-header, footer {
-    background: var(--primary-color);
-    color: #fff;
-    padding: 1rem;
-    text-align: center;
-    letter-spacing: 1px;
+/* =========================
+    Layout
+    ========================= */
+header,
+footer {
+     background: var(--primary-color);
+     color: #fff;
+     padding: 1rem;
+     text-align: center;
+     letter-spacing: 1px;
 }
 
 main {
-    padding: 1rem;
-    max-width: 1000px;
-    margin: 2rem auto;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 2px 16px rgba(38, 50, 56, 0.07);
+     padding: 1rem;
+     max-width: 1000px;
+     margin: 2rem auto;
+     background: #fff;
+     border-radius: 16px;
+     box-shadow: 0 2px 16px rgba(38, 50, 56, 0.07);
 }
 
 .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1rem;
-    margin-top: 2rem;
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+     gap: 1rem;
+     margin-top: 2rem;
 }
 
-/* Card Styles */
+/* =========================
+    Card Styles
+    ========================= */
 .card {
-    background-color: #fff;
-    border: 1px solid #e0e4ea;
-    padding: 1rem;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
-    box-shadow: 0 2px 8px rgba(38, 50, 56, 0.06);
-    text-align: center;
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-    animation: fadeInUp 0.8s cubic-bezier(.23,1.01,.32,1) both;
+     background-color: #fff;
+     border: 1px solid #e0e4ea;
+     padding: 1rem;
+     border-radius: 10px;
+     cursor: pointer;
+     transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+     box-shadow: 0 2px 8px rgba(38, 50, 56, 0.06);
+     text-align: center;
+     position: relative;
+     z-index: 1;
+     overflow: hidden;
+     animation: fadeInUp 0.8s cubic-bezier(.23,1.01,.32,1) both;
 }
 
 .card:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 4px 16px rgba(38, 50, 56, 0.12);
-    border-color: var(--accent-color);
+     transform: translateY(-2px) scale(1.02);
+     box-shadow: 0 4px 16px rgba(38, 50, 56, 0.12);
+     border-color: var(--accent-color);
 }
 
 /* Animated gradient border for cards */
 .card::before {
-    content: "";
-    position: absolute;
-    inset: -2px;
-    z-index: -1;
-    border-radius: 12px;
-    background: linear-gradient(120deg, var(--accent-color), var(--primary-color), var(--accent-color));
-    opacity: 0;
-    transition: opacity 0.3s;
+     content: "";
+     position: absolute;
+     inset: -2px;
+     z-index: -1;
+     border-radius: 12px;
+     background: linear-gradient(120deg, var(--accent-color), var(--primary-color), var(--accent-color));
+     opacity: 0;
+     transition: opacity 0.3s;
 }
 .card:hover::before {
-    opacity: 1;
-    animation: border-gradient-move 2s linear infinite;
+     opacity: 1;
+     animation: border-gradient-move 2s linear infinite;
 }
+
 @keyframes border-gradient-move {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
+     0% { background-position: 0% 50%; }
+     100% { background-position: 100% 50%; }
 }
 
 /* Fade-in animation for cards */
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+     from {
+          opacity: 0;
+          transform: translateY(30px);
+     }
+     to {
+          opacity: 1;
+          transform: translateY(0);
+     }
 }
 
-/* Navigation */
+/* =========================
+    Navigation
+    ========================= */
 nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
 }
 
-nav ul, #nav-links {
-    display: flex;
-    list-style: none;
-    gap: 1rem;
+nav ul,
+#nav-links {
+     display: flex;
+     list-style: none;
+     gap: 1rem;
 }
 
-nav ul li a, #nav-links li a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    padding: 0.5em 1em;
-    border-radius: 4px;
-    transition: background 0.2s, color 0.2s;
-    cursor: pointer;
+nav ul li a,
+#nav-links li a {
+     color: #fff;
+     text-decoration: none;
+     font-weight: 600;
+     padding: 0.5em 1em;
+     border-radius: 4px;
+     transition: background 0.2s, color 0.2s;
+     cursor: pointer;
 }
 
-nav ul li a:hover, #nav-links li a:hover {
-    background: var(--accent-color);
-    color: var(--primary-color);
+nav ul li a:hover,
+#nav-links li a:hover {
+     background: var(--accent-color);
+     color: var(--primary-color);
 }
 
 #menu-toggle {
-    display: none;
-    background: none;
-    font-size: 1.5rem;
+     display: none;
+     background: none;
+     font-size: 1.5rem;
 }
 
 #nav-links.hidden {
-    display: none;
+     display: none;
 }
 
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     flex-wrap: wrap;
 }
 
-/* Buttons */
-.cta-button, .subscribe-button {
-    background-color: var(--primary-color);
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    padding: 0.75em 1.5em;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-    margin-top: 1rem;
-    font-weight: bold;
+/* =========================
+    Buttons
+    ========================= */
+.cta-button,
+.subscribe-button {
+     background-color: var(--primary-color);
+     color: #fff;
+     border: none;
+     border-radius: 6px;
+     padding: 0.75em 1.5em;
+     font-size: 1rem;
+     cursor: pointer;
+     transition: background 0.2s, transform 0.2s;
+     margin-top: 1rem;
+     font-weight: bold;
 }
 
-.cta-button:hover, .subscribe-button:hover {
-    background-color: var(--accent-color);
-    color: #fff;
-    transform: scale(1.05);
-    box-shadow: 0 0 16px 4px var(--accent-color), 0 0 32px 8px var(--primary-color);
+.cta-button:hover,
+.subscribe-button:hover {
+     background-color: var(--accent-color);
+     color: #fff;
+     transform: scale(1.05);
+     box-shadow: 0 0 16px 4px var(--accent-color), 0 0 32px 8px var(--primary-color);
 }
 
-/* Modal */
+/* =========================
+    Modal
+    ========================= */
 .modal {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(35, 39, 47, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
+     position: fixed;
+     top: 0; left: 0;
+     width: 100%; height: 100%;
+     background-color: rgba(35, 39, 47, 0.8);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     z-index: 1000;
 }
 
 .modal-content {
-    background-color: #fff;
-    padding: 2rem;
-    max-width: 500px;
-    width: 90%;
-    border-radius: 12px;
-    position: relative;
-    box-shadow: 0 8px 32px rgba(38, 50, 56, 0.18);
+     background-color: #fff;
+     padding: 2rem;
+     max-width: 500px;
+     width: 90%;
+     border-radius: 12px;
+     position: relative;
+     box-shadow: 0 8px 32px rgba(38, 50, 56, 0.18);
 }
 
 .modal button {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--primary-color);
+     position: absolute;
+     top: 10px;
+     right: 15px;
+     background: none;
+     border: none;
+     font-size: 1.5rem;
+     cursor: pointer;
+     color: var(--primary-color);
 }
 
 .modal.hidden {
-    display: none;
+     display: none;
 }
 
-/* Footer */
+/* =========================
+    Footer
+    ========================= */
 footer {
-    margin-top: 3rem;
-    font-size: 1rem;
+     margin-top: 3rem;
+     font-size: 1rem;
 }
 
 footer a {
-    color: var(--accent-color);
-    text-decoration: underline;
-    transition: color 0.2s;
+     color: var(--accent-color);
+     text-decoration: underline;
+     transition: color 0.2s;
 }
 
 footer a:hover {
-    color: #fff;
+     color: #fff;
 }
 
-/* Responsive Design */
+/* =========================
+    Responsive Design
+    ========================= */
 @media (max-width: 900px) {
-    main {
-        padding: 1rem;
-        margin: 1rem;
-    }
-    .grid {
-        gap: 1rem;
-    }
+     main {
+          padding: 1rem;
+          margin: 1rem;
+     }
+     .grid {
+          gap: 1rem;
+     }
 }
 
 @media (max-width: 768px) {
-    #nav-links {
-        flex-direction: column;
-        width: 100%;
-    }
+     #nav-links {
+          flex-direction: column;
+          width: 100%;
+     }
 }
 
 @media (max-width: 600px) {
-    main {
-        padding: 0.5rem;
-        margin: 0.5rem;
-    }
-    .grid {
-        grid-template-columns: 1fr;
-    }
-    header, footer {
-        padding: 1rem 0.5rem;
-    }
-    nav ul {
-        display: none;
-        flex-direction: column;
-    }
-    nav ul.show {
-        display: flex;
-    }
-    #menu-toggle {
-        display: block;
-    }
+     main {
+          padding: 0.5rem;
+          margin: 0.5rem;
+     }
+     .grid {
+          grid-template-columns: 1fr;
+     }
+     header,
+     footer {
+          padding: 1rem 0.5rem;
+     }
+     nav ul {
+          display: none;
+          flex-direction: column;
+     }
+     nav ul.show {
+          display: flex;
+     }
+     #menu-toggle {
+          display: block;
+     }
 }
