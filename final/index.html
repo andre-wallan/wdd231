@@ -18,7 +18,7 @@
         <nav class="navbar" aria-label="Main navigation">
             <a href="index.html" class="logo" aria-label="Eco Green Home">Eco Green</a>
             <button id="menu-toggle" aria-controls="nav-links" aria-expanded="false" aria-label="Toggle navigation menu">☰</button>
-            <ul id="nav-links" class="nav-links hidden">
+            <ul id="nav-links" class="nav-links open">
                 <li><a href="index.html" aria-current="page">Home</a></li>
                 <li><a href="products.html">Products</a></li>
                 <li><a href="blog.html">Blog</a></li>
@@ -76,7 +76,6 @@
             <nav aria-label="Footer navigation">
                 <a href="attributions.html">Attributions</a> |
                 <a href="https://youtube.com/yourvideo" target="_blank" rel="noopener">Video Demo</a> |
-                <a href="privacy.html">Privacy Policy</a>
             </nav>
         </div>
     </footer>
@@ -88,7 +87,7 @@
         menuToggle.addEventListener('click', () => {
             const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
             menuToggle.setAttribute('aria-expanded', !expanded);
-            navLinks.classList.toggle('hidden');
+            navLinks.classList.toggle('open');
         });
     </script>
     <script src="js/main.js" type="module"></script>
