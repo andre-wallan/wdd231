@@ -9,7 +9,7 @@
     <meta property="og:description" content="Explore eco-tips, green projects, and sustainable products on Eco Green." />
     <meta property="og:image" content="images/og-image.jpg" />
     <meta property="og:url" content="https://yourgithub.github.io/wdd231/final/" />
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="favicon/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/styles.css" />
     <title>Eco Green | Home</title>
 </head>
@@ -59,6 +59,24 @@
                 </blockquote>
             </div>
         </section>
+
+<section class="tips-list-section">
+    <h2>Tips</h2>
+    <ul id="tips-list"></ul>
+</section>
+<script>
+    fetch('data/tips.json')
+        .then(response => response.json())
+        .then(data => {
+            const list = document.getElementById('tips-list');
+            data.forEach(tip => {
+                const li = document.createElement('li');
+                li.textContent = tip.tip;
+                list.appendChild(li);
+            });
+        })
+        .catch(error => console.error('Error loading JSON:', error));
+</script>
 
         <section class="newsletter">
             <h2>Subscribe to Our Newsletter</h2>
