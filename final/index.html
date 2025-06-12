@@ -18,11 +18,11 @@
         <nav class="navbar" aria-label="Main navigation">
             <a href="index.html" class="logo" aria-label="Eco Green Home">Eco Green</a>
             <button id="menu-toggle" aria-controls="nav-links" aria-expanded="false" aria-label="Toggle navigation menu">☰</button>
-            <ul id="nav-links" class="hidden">
+            <ul id="nav-links" class="nav-links hidden">
                 <li><a href="index.html" aria-current="page">Home</a></li>
                 <li><a href="products.html">Products</a></li>
                 <li><a href="blog.html">Blog</a></li>
-                <li><a href="form-response.html">form-response</a></li>
+                <li><a href="form-response.html">Form Response</a></li>
             </ul>
         </nav>
     </header>
@@ -46,15 +46,16 @@
                 <p>Simple actions you can take to reduce your carbon footprint and make your home greener.</p>
                 <p>Discover practical tips and resources for sustainable living.</p>
                 <p>Learn how to create a more eco-friendly home with our expert advice.</p>
-                <a href="eco-tips.html" class="feature-link">Read Tips</a>
+                <a href="tips.json" class="tips">Read Tips</a>
             </article>
+            <div class="testimonials">
                 <blockquote>
                     <p>"Eco Green helped me make my home more sustainable!"</p>
-                    <footer>- Ssemanda Andrew Allan</footer>
+                    <footer>- Ssemanda Allan</footer>
                 </blockquote>
                 <blockquote>
                     <p>"The DIY projects are fun for the whole family."</p>
-                    <footer>-  Andre Wallan</footer>
+                    <footer>- Andre Wallan</footer>
                 </blockquote>
             </div>
         </section>
@@ -80,6 +81,16 @@
         </div>
     </footer>
 
+    <script>
+        // Responsive menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+        menuToggle.addEventListener('click', () => {
+            const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', !expanded);
+            navLinks.classList.toggle('hidden');
+        });
+    </script>
     <script src="js/main.js" type="module"></script>
 </body>
 </html>
