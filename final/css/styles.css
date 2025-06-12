@@ -1,6 +1,6 @@
 :root {
     --primary: #25603b;         /* Deep green */
-    --accent: #4ecb71;          /* Fresh green */
+    --accent: #e3e4e3;          /* Fresh green */
     --text: #23272f;            /* Dark gray-blue */
     --bg: #f9fafb;              /* Soft off-white */
     --font-heading: 'Merriweather', serif;
@@ -8,12 +8,12 @@
     --bg-color: #f9fafb;
     --text-color: #23272f;
     --primary-color: #25603b;
-    --accent-color: #4ecb71;
+    --accent-color: #cecfcf;
 
 [data-theme="dark"] {
     --bg-color: #181c20;
     --text-color: #f5f7fa;
-    --primary-color: #4ecb71;
+    --primary-color: #f4f7f5;
     --accent-color: #25603b;
 }
 }
