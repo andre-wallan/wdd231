@@ -16,7 +16,7 @@
      --font-heading: 'Merriweather', serif;
      --font-body: 'Open Sans', sans-serif;
      --bg-color: #f9fafb;
-     --text-color: #cecfce;
+     --text-color: #23272f;      /* Increased contrast for body text */
      --primary-color: #25603b;
      --accent-color: #e3e4e3;
 }
