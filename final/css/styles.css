@@ -23,7 +23,7 @@
 
 [data-theme="dark"] {
      --bg-color: #181c20;
-     --text-color: #f5f7fa;
+     --text-color: #fff;
      --primary-color: #f4f7f5;
      --accent-color: #25603b;
 }
