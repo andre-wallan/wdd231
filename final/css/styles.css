@@ -16,9 +16,9 @@
      --font-heading: 'Merriweather', serif;
      --font-body: 'Open Sans', sans-serif;
      --bg-color: #f9fafb;
-     --text-color: #83d9ee;
+     --text-color: #cecfce;
      --primary-color: #25603b;
-     --accent-color: #4bfdfd;
+     --accent-color: #e3e4e3;
 }
 
 [data-theme="dark"] {
