@@ -48,7 +48,7 @@ body {
 .logo {
      font-family: var(--font-heading);
      font-size: 1.5rem;
-     color: #005a7a; /* Improved contrast */
+     color: #fff; /* Improved contrast */
      text-decoration: none;
      letter-spacing: 2px;
 }
