@@ -174,12 +174,21 @@ nav ul li a:focus,
      outline: 2px solid var(--primary-color);
      outline-offset: 2px;
 }
-}
 
 #menu-toggle {
+     #menu-toggle {
      display: none;
      background: none;
-     font-size: 1.5rem;
+     border: none;
+     font-size: 2rem;
+     color: #fff;
+     cursor: pointer;
+}
+@media (max-width: 600px) {
+     #menu-toggle {
+          display: block;
+     }
+}
 }
 
 #nav-links.hidden {
