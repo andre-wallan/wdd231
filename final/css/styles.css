@@ -214,6 +214,8 @@ nav ul li a:focus,
      padding: 0.75em 1.5em;
      font-size: 1rem;
      cursor: pointer;
+}
+
 .cta-button:hover,
 .subscribe-button:hover,
 .cta-button:focus,
@@ -225,6 +227,7 @@ nav ul li a:focus,
      outline: 2px solid #005a7a;
      outline-offset: 2px;
 }
+
 .modal {
      position: fixed;
      top: 0; left: 0;
@@ -236,6 +239,7 @@ nav ul li a:focus,
      z-index: 1000;
      overflow-y: auto;
 }
+
 .modal-content {
      background-color: #fff;
      color: #23272f;
@@ -246,6 +250,8 @@ nav ul li a:focus,
      position: relative;
      box-shadow: 0 8px 32px rgba(38, 50, 56, 0.18);
      outline: 3px solid var(--primary-color); /* Focus indicator */
+}
+
 .modal button {
      position: absolute;
      top: 10px;
@@ -258,10 +264,10 @@ nav ul li a:focus,
      outline: 2px solid transparent;
      transition: outline 0.2s;
 }
+
 .modal button:focus {
      outline: 2px solid #005a7a;
      outline-offset: 2px;
-}
 }
 
 .modal button {
